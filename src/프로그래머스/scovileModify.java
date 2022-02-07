@@ -1,6 +1,6 @@
 package 프로그래머스;
 import java.util.*;
-
+//https://programmers.co.kr/learn/courses/30/lessons/42626
 public class scovileModify {
     public static int solution(int[] scoville, int K) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
