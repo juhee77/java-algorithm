@@ -1,25 +1,21 @@
 package 프로그래머스;
 import java.util.*;
 
-public class scovileQue {
+public class scovileModify {
     public static int solution(int[] scoville, int K) {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-
         int answer = 0;
 
-        for(int i=0;i<scoville.length;i++){
-            priorityQueue.offer(scoville[i]);
+        for(int i : scoville){
+            priorityQueue.offer(i);
         }
         while(priorityQueue.peek()<K){
-            if(priorityQueue.peek()==null){
-                    return -1;
+            if(priorityQueue.size()==1){ //peek에서 나온 null값을 비교하는것보다는 size로 계산하는게 효율성이 더 올라감
+                return -1;
             }
-            else{
-                int min = priorityQueue.poll();
-                int nextmin = priorityQueue.poll();
-                priorityQueue.offer(min+nextmin*2);
-                answer++;
-            }
+
+            priorityQueue.offer(priorityQueue.poll()+priorityQueue.poll()*2);
+            answer++;
         }
         return answer;
     }
@@ -30,3 +26,4 @@ public class scovileQue {
         //System.out.println(solution(numbers1));
     }
 }
+
