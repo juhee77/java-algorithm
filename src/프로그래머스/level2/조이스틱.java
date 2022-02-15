@@ -22,15 +22,17 @@ public class 조이스틱 {
             else greed = tp-charId;
 
             answer = answer + Math.min(Math.min(greed_A,greed_Z),greed);
+            System.out.println(Math.min(Math.min(greed_A,greed_Z),greed));
             tp=charId;
         }
+        System.out.println();
         return answer;
     }
     public static void main(String args[]){
-        System.out.println(Character.getNumericValue('A'));
+        //System.out.println(Character.getNumericValue('A'));
         String a="JEROEN";
         System.out.println(solution(a));
-        String b="JAN";
+        String b="JAZ";
         System.out.println(solution(b));
     }
 }
