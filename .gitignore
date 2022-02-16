@@ -1,6 +1,6 @@
 # Default ignored files
 /shelf/
-/workspace.xml
+/.idea/workspace.xml
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
@@ -9,4 +9,4 @@
 
 
 # 참고코드
-src/리트코드/리트코드_shortcoding.java
+리트코드_shortcoding.java
