@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class test {
     public static void main(String args[]){
         int x=5,y=0,z=0;
@@ -14,5 +16,6 @@ public class test {
         }
         System.out.println(j);
         System.out.println(i);
+        System.out.println(new Date().getTime());
     }
 }
