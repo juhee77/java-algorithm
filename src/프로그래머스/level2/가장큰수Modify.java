@@ -1,8 +1,8 @@
 package 프로그래머스.level2;
 //https://programmers.co.kr/learn/courses/30/lessons/42746
 import java.util.Arrays;
-
-public class 가장큰수 {
+//시간 초과남
+public class 가장큰수Modify {
     public static void swap(int[] arr,int a, int b){
         int temp=arr[a];
         arr[a]=arr[b];
@@ -14,14 +14,8 @@ public class 가장큰수 {
             for(int j=numbers.length-1;i+1<=j;j--){
                 String beforenum=String.valueOf(numbers[j-1]);
                 String backnum=String.valueOf(numbers[j]);
-                int[] beforedigit= Arrays.stream(beforenum.split("(?<=.)")).mapToInt(Integer::parseInt).toArray();
-                int[] backdigit= Arrays.stream(backnum.split("(?<=.)")).mapToInt(Integer::parseInt).toArray();
-                if(beforedigit[0]<backdigit[0])
+                if(Integer.parseInt(beforenum+backnum)<Integer.parseInt(backnum+beforenum))
                     swap(numbers,j-1,j);
-                else if(beforedigit[0]==backdigit[0]){
-                    if(numbers[j-1]-beforedigit[0]*Math.pow(10,beforedigit.length-2)<numbers[j]-backdigit[0]*Math.pow(10,backdigit.length-2))
-                        swap(numbers,j-1,j);
-                }
             }
             answer+=Integer.toString(numbers[i]);
         }
@@ -31,5 +25,7 @@ public class 가장큰수 {
     public static void main(String args[]){
         int[] a={3, 30, 34, 5, 9};
         System.out.println(solution(a));
+        int[] b={6, 10, 2};
+        System.out.println(solution(b));
     }
 }
