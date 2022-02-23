@@ -1,7 +1,11 @@
 package 프로그래머스.level2;
 //https://programmers.co.kr/learn/courses/30/lessons/92342
 import java.util.Arrays;
-
+/*
+* 처음 생각으로는 어피치의 맥스값이 경우만 피해서 화살을 맞추고 마냥 하나남은 상황에서 그 사람도 하나를 했다면 넘기고 +1을 해서
+* 쏘는 방향으로 계산했는데 모든경우 계산해봐야 할것 같다.
+*
+* */
 public class 양궁대회 {
     public static int[] solution(int n, int[] info) {
         int[] answer = new int[info.length];
@@ -26,11 +30,12 @@ public class 양궁대회 {
                     n -= info[10-i]+1;
                     ryanScore+=i;
                 }
+                else if(i==0 && 0<n)
+                    answer[10]+=n;
             }
         }
 
-        if(0<n)
-            answer[10]+=n;
+
 
         System.out.println(ryanScore+" "+appeachScore);
         if(ryanScore<=appeachScore){
@@ -47,5 +52,17 @@ public class 양궁대회 {
         int[] ans=solution(5,a);
         for(Integer ele: ans)
             System.out.println(ele);
+
+        /*int []b={1,1,0,0,0,0,0,0,0,0,3};
+        int[] ans2=solution(5,b);
+        for(Integer ele: ans2)
+            System.out.print(ele+" ");
+            */
+
+        int []b={2,2,2,2,2,0,0,0,0,0,0};
+        int[] ans2=solution(10,b);
+        for(Integer ele: ans2)
+            System.out.print(ele+" ");
     }
+
 }
