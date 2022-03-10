@@ -3,7 +3,7 @@ package 프로그래머스.level1;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class 신고결과받기 {
+public class 신고결과받기_hash {
     public static int[] solution(String[] id_list, String[] report, int k) {
 
         int people=id_list.length;

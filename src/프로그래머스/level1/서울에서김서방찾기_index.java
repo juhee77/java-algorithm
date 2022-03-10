@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class 서울에서김서방찾기 {
+public class 서울에서김서방찾기_index {
     public static String solution(String[] seoul) {
         int index = Arrays.asList(seoul).indexOf("Kim");
         System.out.println(index);
