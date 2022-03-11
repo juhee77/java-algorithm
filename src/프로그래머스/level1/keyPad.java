@@ -17,7 +17,7 @@ public class keyPad {
             }
             else{
                 int rightD=0,leftD=0;
-                if(left%3==1 )leftD=Math.abs(leftD/3-ele/3)+1;
+                if(left%3==1 )leftD=Math.abs(left/3-ele/3)+1;
                 else leftD=Math.abs(ele/3-left/3);
 
                 if(right%3==0&& ele !=0)rightD=Math.abs(ele/3-right/3)+1+1;
