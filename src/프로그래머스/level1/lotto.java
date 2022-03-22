@@ -15,9 +15,9 @@ public class lotto {
                 max++;
                 min++;
             }
-        min=(min>=2)?min:6;
-        max=(max>=2)?max:6;
-        return new int[] {7-min,7-max}; //반대일 수도..
+        min=(min>=2)?min:1;
+        max=(max>=2)?max:1;
+        return new int[] {7-max,7-min};
     }
     public static void main(String args[]){
         System.out.println(Arrays.toString(new lotto().solution(new int[]{44, 1, 0, 0, 31, 25},new int[] {31, 10, 45, 1, 6, 19})));
