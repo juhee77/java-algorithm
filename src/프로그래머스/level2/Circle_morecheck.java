@@ -1,8 +1,8 @@
 package 프로그래머스.level2;
 
 import java.util.Arrays;
-///모르겠다... ㅏㅎ야ㅏㄴ
-public class Circle {
+///https://programmers.co.kr/learn/courses/30/lessons/68645 -- 삼각 달팽이 <0322>
+public class Circle_morecheck {
     public int[] solution(int n) {
         int[] answer = new int[n*(n+1)/2];
         int hold = 0;
@@ -76,11 +76,11 @@ public class Circle {
         }
 
         return answer;
-    
+
     */
 
 
     public static void main(String args[]){
-        System.out.println(Arrays.toString(new Circle().solution(1)));
+        System.out.println(Arrays.toString(new Circle_morecheck().solution(10)));
     }
 }
