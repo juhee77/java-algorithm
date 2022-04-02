@@ -26,11 +26,8 @@ public class gameEnergy {
         int[][] output = new int[n][2];
         boolean[] visited = new boolean[n];
 
-<<<<<<< HEAD
-       //int[][]permutation(dungeons, output, visited, 0, n, dungeons.length-1,k);
-=======
-      // int[][]permutation(dungeons, output, visited, 0, n, dungeons.length-1,k);
->>>>>>> 4653422a202534406cc4a137e84f429aa0c64d54
+        //int[][]permutation(dungeons, output, visited, 0, n, dungeons.length-1,k);
+        // int[][]permutation(dungeons, output, visited, 0, n, dungeons.length-1,k);
 
         return answer;
     }
