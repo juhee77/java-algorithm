@@ -1,7 +1,7 @@
 package 프로그래머스.level2;
 
 import java.util.Arrays;
-
+//https://programmers.co.kr/learn/courses/30/lessons/87946 --피로도
 public class gameEnergy {
     public int[][] permutation(int[][] arr, int[][] out, boolean[] visit, int d, int n, int r) {
         int max =0;
@@ -26,7 +26,7 @@ public class gameEnergy {
         int[][] output = new int[n][2];
         boolean[] visited = new boolean[n];
 
-       int[][]permutation(dungeons, output, visited, 0, n, dungeons.length-1,k);
+       //int[][]permutation(dungeons, output, visited, 0, n, dungeons.length-1,k);
 
         return answer;
     }
