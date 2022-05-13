@@ -8,7 +8,7 @@ import java.util.Date;
 public class lastMusic {
     public String solution(String m, String[] musicinfos) throws ParseException {
 
-        SimpleDateFormat hhmm=new SimpleDateFormat("HH:mm");
+        //SimpleDateFormat hhmm=new SimpleDateFormat("HH:mm");
 
         m = m.replaceAll("A#", "a");
         m = m.replaceAll("C#", "c");
@@ -26,12 +26,12 @@ public class lastMusic {
             String[] musinArr = musicinfos[i].split(",");
 
 
-            int diffMin =0;
+            //int diffMin =0;
             String beforeTime[] = musinArr[0].split(":");
             String endTime[] = musinArr[1].split(":");
             int before = Integer.parseInt(beforeTime[0])*60 + Integer.parseInt(beforeTime[1]);
             int end = Integer.parseInt(endTime[0])*60 + Integer.parseInt(endTime[1]);
-            diffMin=(end<before)?1440-before:end-before;
+            int diffMin=(end<before)?1440-before:end-before;
 
             musinArr[3]=musinArr[3].replaceAll("A#", "a");
             musinArr[3]=musinArr[3].replaceAll("C#", "c");
@@ -64,7 +64,7 @@ public class lastMusic {
 
                 else flag =0;
             }
-            String big=Integer.toString(repeatCnt[i])+"-"+diffMin+"-"+i+"-"+musinArr[2];
+            String big=repeatCnt[i]+"-"+diffMin+"-"+i+"-"+musinArr[2];
             String arrMax[] = max.split("-");
 
             if(repeatCnt[i]>Integer.parseInt(arrMax[0]))
