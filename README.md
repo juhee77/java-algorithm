@@ -11,7 +11,7 @@ Java algorithm study 📝 🖥
 
 신규 아이디 추천
 
-<a https://github.com/juhee77/JavaAlgorithmStudy/blob/master/src/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/level1/lotto.java> 로또의 최고순위와 최저순위 </a>
+<a href= https://github.com/juhee77/JavaAlgorithmStudy/blob/master/src/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/level1/lotto.java> 로또의 최고순위와 최저순위 </a>
 
 <a href=https://github.com/juhee77/JavaAlgorithmStudy/blob/master/src/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/level1/dartgame.java> kakao_다트게임 </a>
 
