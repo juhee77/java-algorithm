@@ -10,14 +10,7 @@ public class greedyBoatBinary {
         return zero;
     }
 
-    public int solution(int[] people, int limit) {
-        int cnt=0;
-        while(true){
 
-            cnt ++;
-        }
-        return cnt;
-    }
     public static void main(String[] args) {
         System.out.println(new greedyBoatAll().solution(new int[] {70,50,80,50},100));
     }
