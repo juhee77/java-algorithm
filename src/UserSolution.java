@@ -35,7 +35,7 @@ class Student {
 }
 
 class UserSolution {
-    HashMap<Integer,Student> allStudent = new HashMap<Integer,Student>();
+    HashMap<Integer, Student> allStudent = new HashMap<Integer, Student>();
     HashSet<Integer> Student1_F = new HashSet<Integer>();
     HashSet<Integer> Student2_F = new HashSet<Integer>();
     HashSet<Integer> Student3_F = new HashSet<Integer>();
@@ -56,23 +56,21 @@ class UserSolution {
     }
 
 
-
-    public int addStudent(HashSet<Integer> hashSet){
-        if(hashSet.isEmpty())return 0;
-        else{
-            int maxScore=0;
-            int maxId =0;
+    public int addStudent(HashSet<Integer> hashSet) {
+        if (hashSet.isEmpty()) return 0;
+        else {
+            int maxScore = 0;
+            int maxId = 0;
             Iterator<Integer> iterator = hashSet.iterator();
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Student st = allStudent.get(iterator.next());
 
-                if(st.getScore()>maxScore){
-                    maxScore=st.getScore();
-                    maxId=st.getId();
-                }
-                else if(st.getScore()==maxScore && st.getId()>maxId){
-                    maxScore=st.getScore();
-                    maxId=st.getId();
+                if (st.getScore() > maxScore) {
+                    maxScore = st.getScore();
+                    maxId = st.getId();
+                } else if (st.getScore() == maxScore && st.getId() > maxId) {
+                    maxScore = st.getScore();
+                    maxId = st.getId();
                 }
             }
             //System.out.println(minId);
@@ -81,39 +79,36 @@ class UserSolution {
     }
 
     public int add(int mId, int mGrade, char mGender[], int mScore) {
-        Student student = new Student(mId,mGrade,mGender,mScore);
-        allStudent.put(mId,student);
-        int id =0;
+        Student student = new Student(mId, mGrade, mGender, mScore);
+        allStudent.put(mId, student);
+        int id = 0;
         String gender = String.valueOf(student.getGender());
         //System.out.println(gender);
-        switch(mGrade){
+        switch (mGrade) {
 
             case 1:
-                if(gender.equals("male\u0000\u0000\u0000")){
+                if (gender.equals("male\u0000\u0000\u0000")) {
                     Student1_M.add(mId);
                     id = addStudent(Student1_M);
-                }
-                else {
+                } else {
                     Student1_F.add(mId);
                     id = addStudent(Student1_F);
                 }
                 break;
             case 2:
-                if(gender.equals("male\u0000\u0000\u0000")) {
+                if (gender.equals("male\u0000\u0000\u0000")) {
                     Student2_M.add(mId);
                     id = addStudent(Student2_M);
-                }
-                else {
+                } else {
                     Student2_F.add(mId);
                     id = addStudent(Student2_F);
                 }
                 break;
             case 3:
-                if(gender.equals("male\u0000\u0000\u0000")) {
+                if (gender.equals("male\u0000\u0000\u0000")) {
                     Student3_M.add(mId);
                     id = addStudent(Student3_M);
-                }
-                else {
+                } else {
                     Student3_F.add(mId);
                     id = addStudent(Student3_F);
                 }
@@ -126,21 +121,20 @@ class UserSolution {
         return id;
     }
 
-    public int findStudent(HashSet<Integer> hashSet){
-        if(hashSet.isEmpty())return 0;
-        else{
-            int minScore=1000000000;
-            int minId =1000000000;
+    public int findStudent(HashSet<Integer> hashSet) {
+        if (hashSet.isEmpty()) return 0;
+        else {
+            int minScore = 1000000000;
+            int minId = 1000000000;
             Iterator<Integer> iterator = hashSet.iterator();
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Student st = allStudent.get(iterator.next());
-                if(st.getScore()<minScore){
-                    minScore=st.getScore();
-                    minId=st.getId();
-                }
-                else if(st.getScore()==minScore && st.getId()<minId){
-                    minScore=st.getScore();
-                    minId=st.getId();
+                if (st.getScore() < minScore) {
+                    minScore = st.getScore();
+                    minId = st.getId();
+                } else if (st.getScore() == minScore && st.getId() < minId) {
+                    minScore = st.getScore();
+                    minId = st.getId();
                 }
             }
             //System.out.println(minId);
@@ -150,43 +144,40 @@ class UserSolution {
 
     public int remove(int mId) {
 
-        if(!allStudent.containsKey(mId))
+        if (!allStudent.containsKey(mId))
             return 0;
-        else{
+        else {
             Student st = allStudent.get(mId);
             allStudent.remove(mId);
             int grade = st.getGrade();
-            char [] cgender = st.getGender();
-            String gender=String.valueOf(cgender);
-            int id=0;
-            switch(grade){
+            char[] cgender = st.getGender();
+            String gender = String.valueOf(cgender);
+            int id = 0;
+            switch (grade) {
 
                 case 1:
-                    if(gender.equals("male\u0000\u0000\u0000")){
+                    if (gender.equals("male\u0000\u0000\u0000")) {
                         Student1_M.remove(mId);
                         id = findStudent(Student1_M);
-                    }
-                    else {
+                    } else {
                         Student1_F.remove(mId);
                         id = findStudent(Student1_F);
                     }
                     break;
                 case 2:
-                    if(gender.equals("male\u0000\u0000\u0000")) {
+                    if (gender.equals("male\u0000\u0000\u0000")) {
                         Student2_M.remove(mId);
                         id = findStudent(Student2_M);
-                    }
-                    else {
+                    } else {
                         Student2_F.remove(mId);
                         id = findStudent(Student2_F);
                     }
                     break;
                 case 3:
-                    if(gender.equals("male\u0000\u0000\u0000")) {
+                    if (gender.equals("male\u0000\u0000\u0000")) {
                         Student3_M.remove(mId);
                         id = findStudent(Student3_M);
-                    }
-                    else {
+                    } else {
                         Student3_F.remove(mId);
                         id = findStudent(Student3_F);
                     }
@@ -200,35 +191,32 @@ class UserSolution {
     }
 
     public int query(int mGradeCnt, int mGrade[], int mGenderCnt, char mGender[][], int mScore) {
-        int minScore=1000000000;
-        int minId=100000000;
+        int minScore = 1000000000;
+        int minId = 100000000;
         HashSet<Integer> total = new HashSet<Integer>();
-        for(int i=0;i<mGradeCnt;i++){
-            for(int j=0;j<mGenderCnt;j++){
+        for (int i = 0; i < mGradeCnt; i++) {
+            for (int j = 0; j < mGenderCnt; j++) {
                 int grade = mGrade[i];
                 String gender = String.valueOf(mGender[j]);
-                switch(grade){
+                switch (grade) {
                     case 1:
-                        if(gender.equals("male\u0000\u0000\u0000")){
+                        if (gender.equals("male\u0000\u0000\u0000")) {
                             total.addAll(Student1_M);
-                        }
-                        else {
+                        } else {
                             total.addAll(Student1_F);
                         }
                         break;
                     case 2:
-                        if(gender.equals("male\u0000\u0000\u0000")) {
+                        if (gender.equals("male\u0000\u0000\u0000")) {
                             total.addAll(Student2_M);
-                        }
-                        else {
+                        } else {
                             total.addAll(Student2_F);
                         }
                         break;
                     case 3:
-                        if(gender.equals("male\u0000\u0000\u0000")) {
+                        if (gender.equals("male\u0000\u0000\u0000")) {
                             total.addAll(Student3_M);
-                        }
-                        else {
+                        } else {
                             total.addAll(Student3_F);
                         }
                         break;
@@ -240,26 +228,25 @@ class UserSolution {
 
             }
         }
-        if(total.isEmpty()) return 0;
-        else{
+        if (total.isEmpty()) return 0;
+        else {
             Iterator<Integer> iterator = total.iterator();
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Student st = allStudent.get(iterator.next());
 
-                if(mScore>st.getScore())  continue; //점수가 낮음경우
+                if (mScore > st.getScore()) continue; //점수가 낮음경우
 
-                if(st.getScore()<minScore){
-                    minScore=st.getScore();
-                    minId=st.getId();
-                }
-                else if(st.getScore()==minScore && st.getId()<minId){
-                    minScore=st.getScore();
-                    minId=st.getId();
+                if (st.getScore() < minScore) {
+                    minScore = st.getScore();
+                    minId = st.getId();
+                } else if (st.getScore() == minScore && st.getId() < minId) {
+                    minScore = st.getScore();
+                    minId = st.getId();
                 }
             }
             //System.out.println(minId);
         }
-        if(minId==100000000) return 0;
+        if (minId == 100000000) return 0;
         else return minId;
     }
 }
