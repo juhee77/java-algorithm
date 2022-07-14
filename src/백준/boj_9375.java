@@ -35,25 +35,29 @@ public class boj_9375 {
                 System.out.println(test);
             }*/
             Integer combination[] = hash.values().toArray(new Integer[hash.size()]);
-            //System.out.println(Arrays.toString(combination));
-            int cnt = 0;
-            for (int i = 0; i < hash.size(); i++) {
-                int j = i + 1;
-                int temp = 0;
-                for (; j < hash.size(); j++) {
-                    combination[i] = combination[i] * combination[j];
-                }
 
-                for (j = hash.size() - 1; i <= j; j--) {
-                    cnt += combination[i];
-                    combination[i] = combination[i] / combination[j];
-                }
-
-                cnt += temp;
+            int cnt=1;
+            for(int i=0;i<hash.size();i++){
+                cnt *= combination[i]+1; //옷을 입는 경우가 있으므로  옷수에 +1
             }
-            sb.append(cnt).append('\n');
+            sb.append(cnt-1).append('\n'); //모두 안 입는 겨웅
         }
         System.out.println(sb);
 
     }
 }
+
+/*
+1
+10
+ a a
+b a
+c b
+d b
+e b
+f b
+g c
+h d
+i d
+j d
+ */
