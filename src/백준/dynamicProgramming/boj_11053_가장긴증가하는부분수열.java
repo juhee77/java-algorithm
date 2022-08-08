@@ -27,6 +27,7 @@ public class boj_11053_가장긴증가하는부분수열 {
             sum[i]=1;
             for(int j=0;j<i;j++)
                 if(arr[i]>arr[j] && sum[i]<=sum[j])sum[i] = sum[j]+1;
+            System.out.println(Arrays.toString(sum));
 
         }
         int max = 0;
