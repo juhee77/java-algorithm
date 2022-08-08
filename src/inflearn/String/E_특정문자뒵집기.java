@@ -1,10 +1,10 @@
-package inflearn;
+package inflearn.String;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class 특정문자뒵집기_5 {
+public class E_특정문자뒵집기 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();

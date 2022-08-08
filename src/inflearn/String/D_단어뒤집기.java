@@ -1,10 +1,10 @@
-package inflearn;
+package inflearn.String;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class 단어뒤집기_4 {
+public class D_단어뒤집기 {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int line = Integer.parseInt(br.readLine());

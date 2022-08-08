@@ -1,11 +1,11 @@
-package inflearn;
+package inflearn.String;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 문장속단어_3 {
+public class C_문장속단어 {
     public static void main(String[] args)throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(reader.readLine());

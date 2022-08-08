@@ -1,8 +1,8 @@
-package inflearn;
+package inflearn.String;
 
 import java.util.Scanner;
 
-public class 대소문자변경_2 {
+public class B_대소문자변경 {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         String s = sc.next();

@@ -1,8 +1,8 @@
-package inflearn;
+package inflearn.String;
 
 import java.util.Scanner;
 
-public class 문자찾기_1 {
+public class A_문자찾기 {
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
         String s = in.next().toLowerCase();

@@ -1,10 +1,10 @@
-package inflearn;
+package inflearn.String;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class 유효한팰리드롬_8 {
+public class H_유효한팰리드롬 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
