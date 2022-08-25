@@ -1,4 +1,4 @@
-package 백준.수학;
+package 백준.BFSDFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_7576_tomato {
+public class boj_7576_tomato_bruteforce {
 
     public static void secondDimensionCpy(int a[][], int b[][]) {
         for (int i = 0; i < a.length; i++) {
