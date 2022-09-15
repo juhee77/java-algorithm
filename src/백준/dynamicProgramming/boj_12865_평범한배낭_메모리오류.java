@@ -1,4 +1,4 @@
-package 백준;
+package 백준.dynamicProgramming;
 
 import java.awt.*;
 import java.io.BufferedReader;

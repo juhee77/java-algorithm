@@ -1,4 +1,4 @@
-package 백준;
+package 백준.dynamicProgramming;
 
 import java.io.BufferedReader;
 import java.io.IOException;
