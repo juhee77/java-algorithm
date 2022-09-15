@@ -7,10 +7,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-class point {
+class porintxyz {
     int x, y, z;
 
-    public point(int x, int y, int z) {
+    public porintxyz(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -42,7 +42,9 @@ class point {
 }
 
 public class boj_7569_토마토2 {
-    private static Queue<point> queue = new LinkedList<>();
+
+
+    private static Queue<porintxyz> queue = new LinkedList<>();
     private static int box[][][];
 
     private static void bfs() {
@@ -52,7 +54,7 @@ public class boj_7569_토마토2 {
         int day = 0;
 
         while (!queue.isEmpty()) {
-            point temp = queue.poll();
+            porintxyz temp = queue.poll();
             int px = temp.getX();
             int py = temp.getY();
             int pz = temp.getZ();
@@ -71,7 +73,7 @@ public class boj_7569_토마토2 {
                 //방문안한 노드이면
                 if (box[pz][nx][ny] == 0) {
                     box[pz][nx][ny] = box[pz][px][py] + 1;
-                    queue.add(new point(nx, ny, pz));
+                    queue.add(new porintxyz(nx, ny, pz));
                     day = Math.max(day, box[pz][nx][ny]);
                 }
             }
@@ -89,7 +91,7 @@ public class boj_7569_토마토2 {
                 //방문안한 노드이면
                 if (box[nz][px][py] == 0) {
                     box[nz][px][py] = box[pz][px][py] + 1;
-                    queue.add(new point(px, py, nz));
+                    queue.add(new porintxyz(px, py, nz));
                     day = Math.max(day, box[nz][px][py]);
                 }
             }
@@ -112,7 +114,7 @@ public class boj_7569_토마토2 {
                 st = new StringTokenizer(br.readLine());
                 for (int j = 0; j < col; j++) {
                     box[k][i][j] = Integer.parseInt(st.nextToken());
-                    if (box[k][i][j] == 1) queue.add(new point(i, j, k));
+                    if (box[k][i][j] == 1) queue.add(new porintxyz(i, j, k));
                 }
             }
         }
