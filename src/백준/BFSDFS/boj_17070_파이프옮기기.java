@@ -86,7 +86,5 @@ public class boj_17070_파이프옮기기 {
         else System.out.println(solution());
 
 
-
-        /*iwant test somethicn(*/
     }
 }
