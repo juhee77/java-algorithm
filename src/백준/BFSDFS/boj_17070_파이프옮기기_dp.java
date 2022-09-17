@@ -36,14 +36,14 @@ public class boj_17070_파이프옮기기_dp {
                 if (i == 0 && j < 2) continue;
 
                 //가로로 가는경우
-                if (j - 1 >= 0 && map[i][j - 1] != 1)
+                if (j - 1 >= 0)
                     visited[i][j][0] = visited[i][j - 1][0] + visited[i][j - 1][2];
 
                 //세로로 가는 경우
-                if (i - 1 >= 0 && map[i - 1][j] != 1) visited[i][j][1] = visited[i - 1][j][1] + visited[i - 1][j][2];
+                if (i - 1 >= 0) visited[i][j][1] = visited[i - 1][j][1] + visited[i - 1][j][2];
 
                 //대각선으로 가는경우
-                if (i - 1 >= 0 && j - 1 >= 0 && map[i - 1][j - 1] != 1 && map[i - 1][j] != 1 && map[i][j - 1] != 1) {//대각선
+                if (i - 1 >= 0 && j - 1 >= 0 && map[i - 1][j] != 1 && map[i][j - 1] != 1) {//대각선
                     visited[i][j][2] = visited[i - 1][j - 1][0] + visited[i - 1][j - 1][1] + visited[i - 1][j - 1][2];
                 }
 
