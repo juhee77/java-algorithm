@@ -8,7 +8,6 @@ public class programmers_문자열압축 {
         for (int i = 1; i < s.length() ; i++) { // 문자열의 길이
             int tmpmin = 0;
             String temp = " ";
-            String tempmin_s=" ";
             int flag = 0;
 
             for (int k = 0; k < s.length(); k = k + i) {
@@ -16,17 +15,7 @@ public class programmers_문자열압축 {
                 if (temp.equals(s.substring(k, k + i))) {
                     if (flag==0) tmpmin += 1;
                     flag++;
-                    tempmin_s = String.valueOf(flag);
-
-                    int tenf=0;
-                    for(int q=0;q<tempmin_s.length();q++){
-                        if(tempmin_s.substring(q,q+1).equals("9"))tenf = 1;
-                        else {
-                            tenf=0;
-                            break;
-                        }
-                    }
-                    if(tenf==1)tmpmin++;
+                    if(Math.log10(flag+1)%1==0) tmpmin++;
                      //개수가 10,100,1000 자리수를 넘어가는경우
                 } else {
                     tmpmin += i;
