@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boJ_1629_곱셈 {
+public class boj_1629_곱셈 {
     private static long mod;
     private static long solution(long n, long cnt){
         if(cnt ==1 )return n%mod;
