@@ -10,7 +10,7 @@ public class boj_10830_행렬제곱 {
     public static int[][] matrixSquare(int[][] arr , long n){
         if(n==1) return arr;
 
-        if((int)n%2==0){
+        if(n%2==0){
             int[][] tmp = matrixSquare(arr,n/2);
             return duplix(tmp,tmp);
         }
