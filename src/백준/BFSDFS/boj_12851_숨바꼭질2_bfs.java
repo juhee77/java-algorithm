@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj_12851_숨바꼭질2 {
+public class boj_12851_숨바꼭질2_bfs {
     private static int atime = Integer.MAX_VALUE;
     private static int acnt = 0;
 
