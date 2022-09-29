@@ -31,7 +31,6 @@ public class boj_14502_연구소 {
 
     private static void check() {
         int arrc[][] = new int[arr.length][arr[0].length];
-        boolean visit[][] = new boolean [arr.length][arr[0].length];
 
         for(int i=0;i<arr.length;i++)
             arrc[i]=arr[i].clone();
@@ -47,7 +46,6 @@ public class boj_14502_연구소 {
         Queue<Point> q = new LinkedList<>();
         for( Point a : virus) {
             q.add(a);
-            visit[a.x][a.y]=true;
         }
 
         while (!q.isEmpty()) {
@@ -66,10 +64,9 @@ public class boj_14502_연구소 {
                 if (arrc[nx][ny] == 1 || arrc[nx][ny] == 2) continue;
 
                 //방문안한 노드이면
-                if (arrc[nx][ny] == 0 && !visit[nx][ny]) {
+                if (arrc[nx][ny] == 0) {
                     arrc[nx][ny] = 2;
                     q.add(new Point(nx, ny));
-                    visit[nx][ny]=true;
                 }
             }
         }
