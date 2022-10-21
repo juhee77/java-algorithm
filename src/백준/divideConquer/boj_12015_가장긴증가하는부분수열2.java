@@ -38,7 +38,7 @@ public class boj_12015_가장긴증가하는부분수열2 {
         System.out.println(LIS.size()-1);
 
 
-
+//list 형식이 시간이 더 적게 든다 메모리는 리스트가 더 많이 듬
 
     }
 }
