@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -42,3 +43,9 @@ public class boj_12015_가장긴증가하는부분수열2_list {
 
     }
 }
+
+/*9
+-10 -9 -8 -7 -6 -20 -19 -10 -7
+9
+8 9 10 1 2 3 4 5 6
+ */
