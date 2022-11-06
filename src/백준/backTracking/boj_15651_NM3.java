@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_11561_NM3 {
+public class boj_15651_NM3 {
     private static int n = 0;
     private static int m = 0;
     private static int[] arr;
