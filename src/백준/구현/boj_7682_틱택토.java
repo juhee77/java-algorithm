@@ -13,7 +13,7 @@ public class boj_7682_틱택토 {
         StringBuilder sb = new StringBuilder();
 
         while (!temp.equals("end")) {
-            Xs = Os =0;
+            Xs = Os = 0;
             char[] arr = temp.toCharArray();
 
             for (int i = 0; i < 9; i++) {
@@ -21,59 +21,38 @@ public class boj_7682_틱택토 {
                 else if (arr[i] == 'O') Os++;
             }
 
-            if (Xs == Os )extracted(sb, arr,0);
-            else if(Os+1 ==Xs) extracted(sb, arr,1);
-            else sb.append("invalid\n");
+            boolean tag;
+            if (Xs == Os || Os + 1 == Xs) tag = extracted(sb, arr);
+            else tag = false;
 
+            sb.append(tag ? "valid" : "invalid").append("\n");
             temp = br.readLine();
         }
         System.out.println(sb);
     }
 
-    private static void extracted(StringBuilder sb, char[] arr,int now) {
+    private static boolean extracted(StringBuilder sb, char[] arr) {
 
-        int rflag = getRflag(arr, 'O');
-        int lflag = getLflag(arr, 'O');
-        int cflag = getCflag(arr, 'O');
-        int rXflag = getRflag(arr, 'X');
-        int lXflag = getLflag(arr, 'X');
-        int cXflag = getCflag(arr, 'X');
+        int oflag = getflag(arr, 'O'); //row,col, cross
+        int xflag = getflag(arr, 'X');
 
-        if (rflag + rXflag>= 2 || lflag+lXflag >= 2) sb.append("invalid\n");
-        else {
-            if(now == 0){
-                if(rXflag+lXflag+cXflag==0&&lflag+rflag+cflag>0)sb.append("valid\n");
-                else sb.append("invalid\n");
-            }
-            else if(now==1){
-                if(Xs+Os == 9 && rXflag+lXflag+cXflag+rflag+lflag+cflag==0) sb.append("valid\n");
-                else if(lflag+rflag+cflag==0&&rXflag+lXflag+cXflag>0)sb.append("valid\n");
-                else sb.append("invalid\n");
-            }
+        if (Xs + Os == 9 && oflag + xflag == 0) return true;
+        if (Xs == Os + 1 && oflag == 0 && xflag > 0) return true; //만약 x가 빙고가 있는 경우(x가 마지막에 두어야 한다)그리고 종료
+        if (Xs == Os && oflag > 0 && xflag == 0) return true; //만약 o에 빙고가 있는경우 o를 두고 종료가 되어야 한다.
 
-        }
+        return false;
     }
 
-    private static int getCflag(char[] arr, char x) {
-        int cflag=0;
-        if (arr[0] == x && arr[0] == arr[4] && arr[4] == arr[8]) cflag++;
-        if (arr[2] == x && arr[2] == arr[4] && arr[4] == arr[6]) cflag++;
-        return cflag;
-    }
-
-    private static int getLflag(char[] arr, char x) {
-        int lflag =0;
-        if (arr[0] == x && arr[0] == arr[3] && arr[3] == arr[6]) lflag++;
-        if (arr[1] == x && arr[1] == arr[4] && arr[4] == arr[7]) lflag++;
-        if (arr[2] == x && arr[2] == arr[5] && arr[5] == arr[8]) lflag++;
-        return lflag;
-    }
-
-    private static int getRflag(char[] arr, char x) {
-        int rflag=0;
-        if (arr[0] == x && arr[0] == arr[1] && arr[1] == arr[2]) rflag++;
-        if (arr[3] == x && arr[3] == arr[4] && arr[4] == arr[5]) rflag++;
-        if (arr[6] == x && arr[6] == arr[7] && arr[7] == arr[8]) rflag++;
-        return rflag;
+    private static int getflag(char[] arr, char x) {
+        int flag = 0;
+        if (arr[0] == x && arr[0] == arr[4] && arr[4] == arr[8]) flag++; //가로
+        if (arr[2] == x && arr[2] == arr[4] && arr[4] == arr[6]) flag++;
+        if (arr[0] == x && arr[0] == arr[3] && arr[3] == arr[6]) flag++;
+        if (arr[1] == x && arr[1] == arr[4] && arr[4] == arr[7]) flag++; //세로
+        if (arr[2] == x && arr[2] == arr[5] && arr[5] == arr[8]) flag++;
+        if (arr[0] == x && arr[0] == arr[1] && arr[1] == arr[2]) flag++;
+        if (arr[3] == x && arr[3] == arr[4] && arr[4] == arr[5]) flag++; //대각선
+        if (arr[6] == x && arr[6] == arr[7] && arr[7] == arr[8]) flag++;
+        return flag;
     }
 }
