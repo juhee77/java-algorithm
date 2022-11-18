@@ -1,6 +1,6 @@
 package 프로그래머스.level3;
 
-import 프로그래머스.kakao2022_2.printArr2d;
+
 
 public class 사라지는발판 {
     public int solution(int[][] board, int[] aloc, int[] bloc) {
