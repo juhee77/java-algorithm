@@ -12,11 +12,9 @@ import java.util.StringTokenizer;
 public class boj_1753_최단경로_다익스트라 {
     private static final int INF = (int) 1e9;
     //각 노드에 연결되어있는 노드의 정보를 담음
-    private static ArrayList<ArrayList<Node>> graph = new ArrayList<ArrayList<Node>>();
-    //edge수
-    private static int edge;
+    private static final ArrayList<ArrayList<Node>> graph = new ArrayList<>();
     //최단거리 테이블
-    private static int distance[];
+    private static int[] distance;
 
     private static void dijkstra(int start) {
         PriorityQueue<Node> queue = new PriorityQueue<>();
@@ -39,23 +37,23 @@ public class boj_1753_최단경로_다익스트라 {
                 }
             }
         }
-        return ;
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        edge = Integer.parseInt(st.nextToken());
+        //edge수
+        int edge = Integer.parseInt(st.nextToken());
         int bus = Integer.parseInt(st.nextToken());
         distance = new int[edge];
 
         //그래프 초기화
         for (int i = 0; i < edge; i++)
-            graph.add(new ArrayList<Node>());
+            graph.add(new ArrayList<>());
         //최단거리 배열 초기화
         Arrays.fill(distance, INF);
 
-        int goal = Integer.parseInt(br.readLine())-1;
+        int goal = Integer.parseInt(br.readLine()) - 1;
 
         for (int i = 0; i < bus; i++) {
             st = new StringTokenizer(br.readLine());
@@ -65,11 +63,11 @@ public class boj_1753_최단경로_다익스트라 {
             graph.get(start).add(new Node(end, weight));
         }
 
-        StringBuilder sb= new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         dijkstra(goal);
-        for(int i=0;i<distance.length;i++)
-            if(distance[i]==INF)sb.append("INF"+"\n");
-            else sb.append(distance[i]+"\n");
+        for (int j : distance)
+            if (j == INF) sb.append("INF" + "\n");
+            else sb.append(j).append("\n");
 
         System.out.println(sb);
 

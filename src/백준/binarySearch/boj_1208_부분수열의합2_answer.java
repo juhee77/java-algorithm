@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class boj_1208_부분수열의합2_answer {
-    private static int arr[];
+    private static int[] arr;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,36 +30,36 @@ public class boj_1208_부분수열의합2_answer {
         ArrayList<Integer> list2 = new ArrayList<>();
 
         put(0, numberCount / 2, 0, list1);
-        put(numberCount / 2 , numberCount, 0, list2);
+        put(numberCount / 2, numberCount, 0, list2);
         Collections.sort(list2);
 
-        for (int i = 0; i < list1.size(); i++) {
-            int tmp = goal - list1.get(i);
+        for (Integer integer : list1) {
+            int tmp = goal - integer;
             int upperBound = upperBound(list2, tmp);
             int lowerBound = lowerBound(list2, tmp);
             cnt += upperBound - lowerBound;
         }
-        System.out.println((goal==0)?cnt-1:cnt);
+        System.out.println((goal == 0) ? cnt - 1 : cnt);
 
     }
 
-    private static int lowerBound(ArrayList<Integer> list, int target) {
+    private static int lowerBound(List<Integer> list, int goal) {
         int start = 0;
         int end = list.size();
         while (start < end) {
             int mid = (start + end) >> 1;
-            if (list.get(mid) >= target) end = mid;
+            if (list.get(mid) >= goal) end = mid;
             else start = mid + 1;
         }
         return end;
     }
 
-    private static int upperBound(ArrayList<Integer> list, int target) {
+    private static int upperBound(List<Integer> list, int goal) {
         int start = 0;
         int end = list.size();
         while (start < end) {
             int mid = (start + end) >> 1;
-            if (list.get(mid) <= target) start = mid + 1;
+            if (list.get(mid) <= goal) start = mid + 1;
             else end = mid;
         }
         return end;

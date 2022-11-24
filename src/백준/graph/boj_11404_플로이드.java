@@ -11,14 +11,14 @@ public class boj_11404_플로이드 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int city = Integer.parseInt(br.readLine());
         int line = Integer.parseInt(br.readLine());
-        int arr[][] = new int[city][city];
+        int[][] arr = new int[city][city];
         StringBuilder sb = new StringBuilder();
         int INF = (int) 1e9;
 
         //배열 초기화 (자기자신 가는 방법은 0 )
         for (int i = 0; i < city; i++) {
             Arrays.fill(arr[i], INF);
-            arr[i][i]=0;
+            arr[i][i] = 0;
         }
 
         for (int i = 0; i < line; i++) {
@@ -40,8 +40,8 @@ public class boj_11404_플로이드 {
 
         for (int i = 0; i < city; i++) {
             for (int j = 0; j < city; j++)
-                if (arr[i][j] == INF)  sb.append(0+" ");
-                else sb.append(arr[i][j] + " ");
+                if (arr[i][j] == INF) sb.append(0 + " ");
+                else sb.append(arr[i][j]).append(" ");
             sb.append("\n");
         }
 

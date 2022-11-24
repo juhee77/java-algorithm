@@ -3,11 +3,14 @@ package 백준.graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 class Node implements Comparable<Node> {
-    private int index;
-    private int distance;
+    private final int index;
+    private final int distance;
 
     public Node(int index, int distance) {
         this.index = index;
@@ -33,11 +36,9 @@ class Node implements Comparable<Node> {
 public class boj_1916_최소비용_Dijkstra {
     private static final int INF = (int) 1e9;
     //각 노드에 연결되어있는 노드의 정보를 담음
-    private static ArrayList<ArrayList<Node>> graph = new ArrayList<ArrayList<Node>>();
-    //edge수
-    private static int city;
+    private static final ArrayList<ArrayList<Node>> graph = new ArrayList<>();
     //최단거리 테이블
-    private static int distance[];
+    private static int[] distance;
 
     private static int dijkstra(int start, int end) {
         PriorityQueue<Node> queue = new PriorityQueue<>();
@@ -65,13 +66,14 @@ public class boj_1916_최소비용_Dijkstra {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        city = Integer.parseInt(br.readLine());
+        //edge수
+        int city = Integer.parseInt(br.readLine());
         int bus = Integer.parseInt(br.readLine());
         distance = new int[city];
 
         //그래프 초기화
         for (int i = 0; i < city; i++)
-            graph.add(new ArrayList<Node>());
+            graph.add(new ArrayList<>());
         //최단거리 배열 초기화
         Arrays.fill(distance, INF);
 
@@ -87,8 +89,6 @@ public class boj_1916_최소비용_Dijkstra {
         int start = Integer.parseInt(st.nextToken());
         int end = Integer.parseInt(st.nextToken());
         System.out.println(dijkstra(start - 1, end - 1));
-
-
 
         /*플로이드 워셜*/
 //        for(int p = 0;p<city;p++){

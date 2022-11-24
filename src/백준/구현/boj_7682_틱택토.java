@@ -22,8 +22,11 @@ public class boj_7682_틱택토 {
             }
 
             boolean tag;
-            if (Xs == Os || Os + 1 == Xs) tag = extracted(sb, arr);
-            else tag = false;
+            if (Xs == Os || Os + 1 == Xs) {
+                tag = extracted(arr);
+            } else {
+                tag = false;
+            }
 
             sb.append(tag ? "valid" : "invalid").append("\n");
             temp = br.readLine();
@@ -31,16 +34,16 @@ public class boj_7682_틱택토 {
         System.out.println(sb);
     }
 
-    private static boolean extracted(StringBuilder sb, char[] arr) {
+    private static boolean extracted(char[] arr) {
 
         int oflag = getflag(arr, 'O'); //row,col, cross
         int xflag = getflag(arr, 'X');
 
-        if (Xs + Os == 9 && oflag + xflag == 0) return true;
-        if (Xs == Os + 1 && oflag == 0 && xflag > 0) return true; //만약 x가 빙고가 있는 경우(x가 마지막에 두어야 한다)그리고 종료
-        if (Xs == Os && oflag > 0 && xflag == 0) return true; //만약 o에 빙고가 있는경우 o를 두고 종료가 되어야 한다.
-
-        return false;
+        if (Xs + Os == 9 && oflag + xflag == 0) {
+            return true;
+        }
+        return Xs == Os + 1 && oflag == 0 && xflag > 0; //만약 x가 빙고가 있는 경우(x가 마지막에 두어야 한다)그리고 종료
+//만약 o에 빙고가 있는경우 o를 두고 종료가 되어야 한다.
     }
 
     private static int getflag(char[] arr, char x) {

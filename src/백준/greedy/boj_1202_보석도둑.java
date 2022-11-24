@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class boj_1202_보석도둑 {
-    private static class dia{
+    private static class dia {
         int weight, money;
 
         public dia(int weight, int money) {
@@ -20,31 +20,24 @@ public class boj_1202_보석도둑 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
-        int[] bag= new int[k];
+        int[] bag = new int[k];
         ArrayList<dia> dias = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            dias.add(new dia(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken())));
+            dias.add(new dia(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
         }
 
-        Collections.sort(dias, new Comparator<dia>() {
-            @Override
-            public int compare(dia o1, dia o2) {
-                if(o1.weight==o2.weight)
-                    return o2.money-o1.money;
-                return o1.weight-o2.weight;
-            }
-        });
-        for (int i = 0; i < k; i++)bag[i]=Integer.parseInt(br.readLine());
+        dias.sort(Comparator.comparingInt(o -> o.weight));
+        for (int i = 0; i < k; i++) bag[i] = Integer.parseInt(br.readLine());
         Arrays.sort(bag);
 
         PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
         long sum = 0;
-        for(int i=0,j=0;i<k;i++){
-            while(j<n && dias.get(j).weight<=bag[i])
+        for (int i = 0, j = 0; i < k; i++) {
+            while (j < n && dias.get(j).weight <= bag[i])
                 pq.offer(dias.get(j++).money);
 
-            if(!pq.isEmpty()) sum += pq.poll();
+            if (!pq.isEmpty()) sum += pq.poll();
         }
 
         System.out.println(sum);
