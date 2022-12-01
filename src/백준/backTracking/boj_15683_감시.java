@@ -1,4 +1,4 @@
-package 백준.BFSDFS;
+package 백준.backTracking;
 
 import java.awt.*;
 import java.io.BufferedReader;
