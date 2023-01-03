@@ -3,7 +3,8 @@ package inflearn.Twopointers_Slindingwindow;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+
+
 
 public class E_연속된자연수의합 {
     //투포인터
@@ -25,6 +26,16 @@ public class E_연속된자연수의합 {
     }
 
     //수학
+
+    /**
+     * ex> 15라면
+     * 2가지로 나누는 방법 x, x+1 => 2x +1 가 15가 되는 x =7 가능
+     * 3가지로 가누는 방법 x, x+1,x+2 => 3x +3가 15가 15가 되는 x = 4 가능
+     * 4가지로 나누는 방법 x, x+1, x+2, x+3 => 4x+6 가 15가 되는 x = 9/4 불가능
+     * 5가지로 나누느 방법 x, x+1, x+2, x+3, x+4 => 5x + 10가 15가 되는 x = 1가능
+     * 이후로는 다 불가능 이런식으로 수학적 계산이 가능하다.
+     * 아래 경우는 x+1, x+2,x+3 .. 순으로 간다.
+     */
     public int solution2(int n){
         int answer=0, cnt=1;
         n--;
@@ -32,6 +43,15 @@ public class E_연속된자연수의합 {
             cnt++;
             n=n-cnt;
             if(n%cnt==0) answer++;
+        }
+        return answer;
+    }
+    public int solution3(int n){
+        int answer=0, cnt=0;
+        while(n>0){
+            cnt++;
+            n=n-cnt;
+            if(n%(cnt+1)==0 && 0<n)answer++;
         }
         return answer;
     }
@@ -55,5 +75,11 @@ public class E_연속된자연수의합 {
             }
         }
         System.out.println(cnt);
+
+        E_연속된자연수의합 T = new E_연속된자연수의합();
+        System.out.println(T.solution2(n));
+        System.out.println(T.solution(n));
+        System.out.println(T.solution3(n));
+
     }
 }
