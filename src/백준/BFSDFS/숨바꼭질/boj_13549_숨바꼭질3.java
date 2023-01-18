@@ -1,4 +1,4 @@
-package 백준.BFSDFS;
+package 백준.BFSDFS.숨바꼭질;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class boj_13549_숨바꼭질3 {
     private static Queue<Integer> queue = new LinkedList<>();
 
-    private static void check(int i, int visited[], int cnt) {
+    private static void check(int i, int[] visited, int cnt) {
         if (i < 0 || 100000 < i || visited[i] != 0) return;
         visited[i] = cnt + 1;
         queue.add(i);
@@ -18,23 +18,18 @@ public class boj_13549_숨바꼭질3 {
     }
 
     private static int bfs(int me, int goal) {
-        queue.add(me);
-        int visited[] = new int[100001];
+        int[] visited = new int[100001];
         visited[me] = 1;
+        queue.add(me);
+
         while (!queue.isEmpty()) {
             int temp = queue.poll();
-
             int cnt = visited[temp];
+            if (temp == goal) break;
 
-            if (temp == goal)
-                break;
-
-            check(temp * 2, visited, cnt-1);
+            check(temp * 2, visited, cnt - 1);
             check(temp + 1, visited, cnt);
             check(temp - 1, visited, cnt);
-
-
-
         }
 
         return visited[goal] - 1;

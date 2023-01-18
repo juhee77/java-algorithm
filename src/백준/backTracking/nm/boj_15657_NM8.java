@@ -1,36 +1,35 @@
-package 백준.backTracking;
+package 백준.backTracking.nm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_15652_NM4 {
+public class boj_15657_NM8 {
     static StringBuilder sb = new StringBuilder();
     static int[] arr;
     static boolean[][] visit;
+    static int[] input;
 
     private static void dfs(int n, int m, int d) {
         if(d == m) {
-
             for(int i=0;i<arr.length-1;i++){
                 if(arr[i]>arr[i+1]) return ;
             }
-
-            for(int a : arr) sb.append(a + " ");
+            for(int a : arr) sb.append(a).append(" ");
             sb.append("\n");
             return;
         }
 
-        for(int i = 1; i <= n; i++) {
+        for(int i = 0; i < n; i++) {
             if(!visit[d][i]) {
                 visit[d][i] = true;
-                arr[d] = i;
+                arr[d] = input[i];
                 dfs(n, m, d+1);
                 visit[d][i] = false;
             }
         }
-        return;
     }
 
     public static void main(String[] args) throws IOException {
@@ -40,7 +39,12 @@ public class boj_15652_NM4 {
         st = new StringTokenizer(br.readLine());
         int x=Integer.parseInt(st.nextToken());
         int y=Integer.parseInt(st.nextToken());
-        arr = new int[y]; visit = new boolean[x+1][x+1];
+        input = new int[x];
+        st  = new StringTokenizer(br.readLine());
+        for(int i=0;i<x;i++)
+            input[i]=Integer.parseInt(st.nextToken());
+        Arrays.sort(input);
+        arr = new int[y]; visit = new boolean[x][x];
         dfs(x,y, 0);
         System.out.print(sb);
 

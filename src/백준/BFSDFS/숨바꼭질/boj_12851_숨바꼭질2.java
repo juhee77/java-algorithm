@@ -1,25 +1,24 @@
-package 백준.BFSDFS;
+package 백준.BFSDFS.숨바꼭질;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj_12851_숨바꼭질2_bfs {
+public class boj_12851_숨바꼭질2 {
     private static int atime = Integer.MAX_VALUE;
     private static int acnt = 0;
 
-    private static void bfs(int n, int m) {
+    private static void solution(int n, int m) {
         if (m <= n) {
             atime = (m < n) ? n - m : 0;
             acnt = 1;
             return;
         }
 
-        boolean visit[] = new boolean[100001];
+        boolean[] visit = new boolean[100001];
         Queue<int[]> q = new LinkedList<>();
         q.add(new int[]{n, 0});
         visit[n] = true;
@@ -50,12 +49,14 @@ public class boj_12851_숨바꼭질2_bfs {
         }
     }
 
+
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        bfs(n, m);
+        solution(n, m);
         System.out.println(atime + "\n" + acnt);
     }
 }

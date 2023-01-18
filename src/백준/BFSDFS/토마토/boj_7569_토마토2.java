@@ -1,4 +1,4 @@
-package 백준.BFSDFS;
+package 백준.BFSDFS.토마토;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,21 +36,18 @@ class porintxyz {
         return z;
     }
 
-    public void setZ(int z) {
-        this.z = z;
-    }
 }
 
 public class boj_7569_토마토2 {
 
 
-    private static Queue<porintxyz> queue = new LinkedList<>();
-    private static int box[][][];
+    private static final Queue<porintxyz> queue = new LinkedList<>();
+    private static int[][][] box;
 
     private static void bfs() {
-        int dirx[] = new int[]{-1, 1, 0, 0};
-        int diry[] = new int[]{0, 0, -1, 1};
-        int dirz[] = new int[]{-1, 1};
+        int[] dirx = new int[]{-1, 1, 0, 0};
+        int[] diry = new int[]{0, 0, -1, 1};
+        int[] dirz = new int[]{-1, 1};
         int day = 0;
 
         while (!queue.isEmpty()) {

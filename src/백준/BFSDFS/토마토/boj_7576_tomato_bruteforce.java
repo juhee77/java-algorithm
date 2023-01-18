@@ -1,18 +1,15 @@
-package 백준.BFSDFS;
+package 백준.BFSDFS.토마토;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class boj_7576_tomato_bruteforce {
 
-    public static void secondDimensionCpy(int a[][], int b[][]) {
+    public static void secondDimensionCpy(int[][] a, int[][] b) {
         for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a[i].length; j++) {
-                b[i][j] = a[i][j];
-            }
+            System.arraycopy(a[i], 0, b[i], 0, a[i].length);
         }
     }
 
@@ -21,8 +18,8 @@ public class boj_7576_tomato_bruteforce {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int col = Integer.parseInt(st.nextToken());
         int row = Integer.parseInt(st.nextToken());
-        int box[][] = new int[row + 2][col + 2];
-        int nextbox[][] = new int[row + 2][col + 2];
+        int[][] box = new int[row + 2][col + 2];
+        int[][] nextbox = new int[row + 2][col + 2];
         for (int i = 0; i <= row + 1; i++) {
             if (i == 0 || i == row + 1)
                 for (int j = 0; j <= col + 1; j++) box[i][j] = -1;

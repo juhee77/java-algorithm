@@ -1,17 +1,16 @@
-package 백준.BFSDFS;
+package 백준.BFSDFS.토마토;
 
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj_7576_토마토 {
-    private static Queue<Point> queue = new LinkedList<>();
-    private static int box[][];
+    private static final Queue<Point> queue = new LinkedList<>();
+    private static int[][] box;
 
 //    private static void pring(int row){
 //        for (int i = 0; i < row; i++) {
@@ -20,8 +19,8 @@ public class boj_7576_토마토 {
 //    }
 
     private static void bfs() {
-        int dirx[] = new int[]{-1, 1, 0, 0};
-        int diry[] = new int[]{0, 0, -1, 1};
+        int[] dirx = new int[]{-1, 1, 0, 0};
+        int[] diry = new int[]{0, 0, -1, 1};
         int day = 0;
 
         while (!queue.isEmpty()) {

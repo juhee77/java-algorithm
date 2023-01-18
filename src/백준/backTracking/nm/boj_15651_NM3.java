@@ -1,4 +1,4 @@
-package 백준.backTracking;
+package 백준.backTracking.nm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
