@@ -56,9 +56,6 @@ public class B_바둑이승차_DFS {
 
     }
 
-    /**
-     * solution
-     */
     public static void DFS(int L, int sum, int[] arr) {
         if (sum > c) return;
         if (L == n) {

@@ -59,10 +59,6 @@ public class A_합이같은부분집합_DFS_amazon_interview {
         dfs(nowDepth + 1, maxDepth, visited, arr);
     }
 
-
-    /**
-     * solution
-     */
     public static void DFS(int L, int sum, int[] arr) {
         if (flag) return;
         if (sum > total / 2) return;

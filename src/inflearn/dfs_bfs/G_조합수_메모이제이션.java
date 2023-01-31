@@ -32,7 +32,6 @@ public class G_조합수_메모이제이션 {
 
     static int[][] dy = new int[35][35];
 
-    /*=== ans ===*/
     public static int DFS(int n, int r) {
         if (dy[n][r] > 0) return dy[n][r];
         if (n == r || r == 0) return 1;
