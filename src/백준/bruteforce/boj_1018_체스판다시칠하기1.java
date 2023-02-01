@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_1018 {
+public class boj_1018_체스판다시칠하기1 {
     public static int check(char arr[][], int x, int y){
         int cnt1=0;
         int cnt2=0;

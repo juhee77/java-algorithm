@@ -25,7 +25,7 @@ public class boj_17071_숨바꼭질5 {
         if (n == k) return 0;
 
         visited[0][n] = true;
-        queue.add(n)
+        queue.add(n);
         int t = 1;
         //ex) 홀수 번째에 방문한 경우 이후 홀수번째에도 방문가능함 -> 즉 만약 움직인 위치가 홀수 타임이라면 과거에 그 위치에 홀수번째 타임에 방문한 경우 그때 잡을 수 있음
         int nowSister = k;
