@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 public class boj_15711_환상의짝궁 {
     public static List<Long> prime = new ArrayList<>();
-    private static final boolean[] isPrime = new boolean[2_000_001];
+    private static final boolean[] isNotPrime = new boolean[2_000_001];
     public static final String NO = "NO";
     public static final String YES = "YES";
 
@@ -45,13 +45,13 @@ public class boj_15711_환상의짝궁 {
     }
 
     private static void initPrime() {
-        isPrime[0]=isPrime[1]=true;
+        isNotPrime[0]= isNotPrime[1]=true;
 
-        for(int i=2;i<isPrime.length;i++){
-            if(isPrime[i]) continue;
+        for(int i = 2; i< isNotPrime.length; i++){
+            if(isNotPrime[i]) continue;
             prime.add((long) i);
-            for(int j=i*2;j<isPrime.length;j+=i) {
-                isPrime[j]=true; //에라토스 테네스의 체 사용
+            for(int j = i*2; j< isNotPrime.length; j+=i) {
+                isNotPrime[j]=true; //에라토스 테네스의 체 사용
             }
         }
     }
@@ -59,7 +59,7 @@ public class boj_15711_환상의짝궁 {
 
     private static boolean isPrime(long n) {
         if (n == 1) return false;
-        if(n<isPrime.length) return !isPrime[(int) n];
+        if(n< isNotPrime.length) return !isNotPrime[(int) n];
         for (Long now : prime) {
             if(n%now==0) return false;
         }
