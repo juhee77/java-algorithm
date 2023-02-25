@@ -30,29 +30,32 @@ public class boj_1697_숨바꼭질Re {
         int time = 0;
 
         while (!queue.isEmpty()) {
-            time++;
             int qSize = queue.size();
             for (int i = 0; i < qSize; i++) {
                 Integer now = queue.poll();
-
-                if (extracted(visited, now, 1) == goal || extracted(visited, now, -1) == goal
-                        || extracted(visited, now, now) == goal) {
+                if (now + 1 == goal || now - 1 == goal || now * 2 == goal) {
                     return time;
                 }
+
+                if (0 <= now + 1 && now + 1 <= 100000 && !visited[now + 1]) {
+                    queue.add(now + 1);
+                    visited[now + 1] = true;
+                }
+                if (0 <= now -1 && now - 1 <= 100000 && !visited[now -1 ]) {
+                    queue.add(now -1);
+                    visited[now - 1] = true;
+                }
+                if (0 <= now *2 && now *2 <= 100000 && !visited[now *2]) {
+                    queue.add(now *2);
+                    visited[now *2] = true;
+                }
             }
+            time++;
         }
 
         return -1;
     }
 
-    private static int extracted(boolean[] visited, int temp, int dir) {
-        int moved = temp + dir;
-        if (0 <= moved && moved <= 100000 && !visited[moved]) {
-            queue.add(moved);
-            visited[moved] = true;
-        }
-        return moved;
-    }
 }
 
 

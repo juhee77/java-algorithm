@@ -23,7 +23,7 @@ public class boj_1024_수열의합 {
             int temp = (l) * (l - 1) / 2;
             if (n < temp) {
                 break;
-            } else if (((double) n - temp) % l == 0) {
+            } else if ((n - temp) % l == 0) {
                 x = (n - temp) / l; // 시작점
                 break;
             }

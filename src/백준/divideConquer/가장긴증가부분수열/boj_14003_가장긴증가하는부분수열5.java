@@ -1,4 +1,4 @@
-package 백준.divideConquer;
+package 백준.divideConquer.가장긴증가부분수열;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -52,8 +52,8 @@ public class boj_14003_가장긴증가하는부분수열5 {
                 now--;
             }
         }
-        sb.append(LIS.size() - 1 + "\n");
-        while (!s.isEmpty()) sb.append(s.pop() + " ");
+        sb.append(LIS.size() - 1).append("\n");
+        while (!s.isEmpty()) sb.append(s.pop()).append(" ");
         System.out.println(sb);
     }
 }

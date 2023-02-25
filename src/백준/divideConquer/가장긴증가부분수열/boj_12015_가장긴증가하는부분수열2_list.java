@@ -1,11 +1,9 @@
-package 백준.divideConquer;
+package 백준.divideConquer.가장긴증가부분수열;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class boj_12015_가장긴증가하는부분수열2_list {

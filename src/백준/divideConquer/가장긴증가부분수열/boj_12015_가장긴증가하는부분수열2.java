@@ -1,4 +1,4 @@
-package 백준.divideConquer;
+package 백준.divideConquer.가장긴증가부분수열;
 
 import java.io.BufferedReader;
 import java.io.IOException;
