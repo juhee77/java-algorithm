@@ -1,27 +1,19 @@
 package 백준.구현;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class boj_17472_다리만들기2 {
-    /*
-     * 다리는 바다에만 건설할 수 있고, 다리의 길이는 다리가 격자에서 차지하는 칸의 수이다. 다리를 연결해서 모든 섬을 연결하려고 한다. 한
-     * 다리의 방향이 중간에서 바뀌면 안되고 다리의길이는 2이상이어야 한다. 다리를 연결하다 중간에 있는 섬은 연결된것이 아니다. 다리의 길이는
-     * 겹치는 구간도 포함한다. 모든 섬을 연결하는 다리의 최솟값을 구하여라 다리는 가로로 여녁ㄹ되어야 한다.
-     */
+    private static final ArrayList<ArrayList<Point>> landsSeaEdges = new ArrayList<>();
+    private static final int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    public static final int MAX = Integer.MAX_VALUE;
 
     private static int N, M;
+    private static int landCnt = 0;
     private static int[][] map;
-    private static final ArrayList<Point> ilands = new ArrayList<>();
-    private static final ArrayList<ArrayList<Point>> ilandsEdges = new ArrayList<>();
-    private static final int[][] dirs = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
-    private static int[][] minDistanceIlands;
+    private static int[][] minBridges;
     private static int[] parents;
 
     public static void main(String[] args) throws IOException {
@@ -40,45 +32,44 @@ public class boj_17472_다리만들기2 {
         }
 
         // 섬을 찾아서 주변에 바다가 있는경우 해당 바다의 위치로 나가는 방향으로 가능한 섬이 있는지 확인한다.
-        int nowIlandCnt = 10;
+        int nowLandColor = 10;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (map[i][j] == 1) {
                     // 하나의 섬을 발견했다.
-                    ilands.add(new Point(i, j));
-                    ilandsEdges.add(new ArrayList<>());
+                    landsSeaEdges.add(new ArrayList<>());
+                    landCnt++;
 
                     // 연결됨 섬을 색칠한다.
-                    findIland(i, j, nowIlandCnt++);
+                    findLand(i, j, nowLandColor++);
                 }
             }
         }
 
         // 각 섬에 대해서 주변으로 바다가 있는 경우 모두 나아갔을때 섬이랑 만나는 경로를 찾는다.
-        minDistanceIlands = new int[ilands.size()][ilands.size()];
-        for (int i = 0; i < ilands.size(); i++) {
-            Arrays.fill(minDistanceIlands[i], Integer.MAX_VALUE);
-            findIlandAndDistance(i);
+        minBridges = new int[landCnt][landCnt];
+        for (int i = 0; i < landCnt; i++) {
+            Arrays.fill(minBridges[i], MAX);
+            findBridgeDistance(i);
         }
 
-//		for (int i = 0; i < ilands.size(); i++) {
-//			System.out.println(Arrays.toString(minDistanceIlands[i]));
-//		}
         // 각 섬에 대해서 모든 섬으로 향하는 최단 값 크루스칼
-        System.out.println(findMin());
+        System.out.println(findMinMst());
     }
 
-    private static int findMin() {
+    //최단 경로를 탐색한다.
+    private static int findMinMst() {
         LinkedList<Line> pq = new LinkedList<>();
-        parents = new int[ilands.size()];
-        for (int i = 0; i < ilands.size(); i++)
+        parents = new int[landCnt];
+        for (int i = 0; i < landCnt; i++)
             parents[i] = i;
 
-        for (int i = 0; i < ilands.size(); i++) {
-            for (int j = 0; j < ilands.size(); j++) {
-                if (minDistanceIlands[i][j] == Integer.MAX_VALUE)
+        //다리를 둘 수 있는 경우만 추가한다.
+        for (int i = 0; i < landCnt; i++) {
+            for (int j = 0; j < landCnt; j++) {
+                if (minBridges[i][j] == MAX)
                     continue;
-                pq.add(new Line(i, j, minDistanceIlands[i][j]));
+                pq.add(new Line(i, j, minBridges[i][j]));
             }
         }
         Collections.sort(pq);
@@ -92,7 +83,8 @@ public class boj_17472_다리만들기2 {
             unionParents(l.x, l.y);
         }
 
-        for (int i = 0; i < ilands.size(); i++) {
+        //모든 섬을 연결하지 못하는 경우
+        for (int i = 0; i < landCnt; i++) {
             if (findParent(parents[i]) != 0)
                 return -1;
         }
@@ -115,8 +107,8 @@ public class boj_17472_다리만들기2 {
         }
     }
 
-    private static void findIlandAndDistance(int idx) {
-        for (Point now : ilandsEdges.get(idx)) {
+    private static void findBridgeDistance(int idx) {
+        for (Point now : landsSeaEdges.get(idx)) {
             // 각 섬의 위치에서 바다인 방면을 향해서 나아갔을때 섬이 있는경우 mindistance를 변경한다.
 
             for (int i = 0; i < 4; i++) {
@@ -134,7 +126,7 @@ public class boj_17472_다리만들기2 {
                         minDistance++;
                         mvx += dirs[i][0];
                         mvy += dirs[i][1];
-                        if (mvx < 0 || mvy < 0 || N <= mvx || M <= mvy || map[mvx][mvy] == idx + 10) { // 범위를 벗어 나거나 자신의
+                        if (mvx < 0 || mvy < 0 || N <= mvx || M <= mvy || map[mvx][mvy] == idx + 10) { // 범위를 벗어 나거나 자신의 섬인경우
                             break;
                         }
 
@@ -144,14 +136,14 @@ public class boj_17472_다리만들기2 {
                         }
                     }
                     if (findLand != -1 && minDistance >= 2) {
-                        minDistanceIlands[idx][findLand] = Math.min(minDistanceIlands[idx][findLand], minDistance);
+                        minBridges[idx][findLand] = Math.min(minBridges[idx][findLand], minDistance);
                     }
                 }
             }
         }
     }
 
-    private static void findIland(int x, int y, int color) {
+    private static void findLand(int x, int y, int color) {
         map[x][y] = color;
         Queue<Point> q = new LinkedList<>();
         q.add(new Point(x, y));
@@ -174,8 +166,8 @@ public class boj_17472_다리만들기2 {
                 map[mvx][mvy] = color;
                 q.add(new Point(mvx, mvy));
             }
-            if (seaF)
-                ilandsEdges.get(color - 10).add(out);
+            if (seaF) //4방위중 바다가 있는 경우메나 추가한다.
+                landsSeaEdges.get(color - 10).add(out);
         }
     }
 
