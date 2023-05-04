@@ -54,18 +54,12 @@ public class boj_1939_중량제한 {
     }
 
     private static int findMaxWeight(int start, int end) {
-        //가장 많이 나를수 있는 다리부터 정렬
         Collections.sort(bridges);
-
         for (Bridge bridge : bridges) {
-            int a = findParent(bridge.start);
-            int b = findParent(bridge.end);
 
-            if (a != b) {
-                //서로 하나의 동선이 아닌경우에만 넣는다.
-                unionParents(bridge.start, bridge.end);
-            }
+            unionParents(bridge.start, bridge.end);
 
+            // 한 사이클 안에 있다, 갈 수 있다.
             if (findParent(start) == findParent(end)) {
                 return bridge.weight;
             }
@@ -74,8 +68,13 @@ public class boj_1939_중량제한 {
     }
 
     private static void unionParents(int a, int b) {
-        if (a < b) parents[b] = a;
-        else parents[a] = b;
+        a = findParent(a);
+        b = findParent(b);
+
+        if (a != b) {
+            if (a < b) parents[b] = a;
+            else parents[a] = b;
+        }
     }
 
     private static int findParent(int a) {
