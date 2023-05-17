@@ -6,9 +6,10 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * 시간초과
+ * 시간 초과
  */
 public class boj_1034_램프_bit {
+    private static char[][] lamps;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,34 +18,60 @@ public class boj_1034_램프_bit {
         st = new StringTokenizer(br.readLine());
         int row = Integer.parseInt(st.nextToken());
         int col = Integer.parseInt(st.nextToken());
-        String[] map = new String[row];
+
+        lamps = new char[row][col];
 
         for (int i = 0; i < row; i++) {
-            map[i] = br.readLine();
+            lamps[i] = br.readLine().toCharArray();
+        }
+        int chance = Integer.parseInt(br.readLine());
+
+
+        System.out.println(getMaxLitRows(chance));
+    }
+
+    public static int getMaxLitRows(int K) {
+        int numRows = lamps.length;
+        int numCols = lamps[0].length;
+        int maxLitRows = 0;
+
+        for (int i = 0; i < (1 << numRows); i++) {
+            int numSwitches = Integer.bitCount(i);
+            if (numSwitches <= K) {
+                int[][] tempLamps = new int[numRows][numCols];
+                for (int j = 0; j < numRows; j++) {
+                    if ((i & (1 << j)) != 0) {
+                        for (int k = 0; k < numCols; k++) {
+                            tempLamps[j][k] = 1 - lamps[j][k];
+                        }
+                    } else {
+                        for (int k = 0; k < numCols; k++) {
+                            tempLamps[j][k] = lamps[j][k];
+                        }
+                    }
+                }
+                int numLitRows = countLitRows(tempLamps);
+                maxLitRows = Math.max(maxLitRows, numLitRows);
+            }
         }
 
-        int chance = Integer.parseInt(br.readLine());
-        int max = 0;
+        return maxLitRows;
+    }
 
-        for (int i = 0; i < row; i++) {
-            int offCnt = 0;
-            for (int j = 0; j < col; j++) {//가로줄에 켜진것 센다.
-                if (map[i].charAt(j) == '0') offCnt++;
-            }
-
-            //한줄씩 해당 줄에 불이 들어오는 경우라고 생각
-            // 한줄에 불이 들어온경우에는 현재 줄과 같은 경우만 한 줄(행)이 불이 들어온다.
-            //해시를 이용하여 비교할 수도 있다.
-            int tmpMax = 0;
-            if (offCnt <= chance && offCnt % 2 == chance % 2) {
-                for (int j = 0; j < row; j++) {
-                    if(map[i].equals(map[j])) tmpMax++;
+    public static int countLitRows(int[][] lamps) {
+        int numLitRows = 0;
+        for (int[] row : lamps) {
+            boolean isLitRow = true;
+            for (int lamp : row) {
+                if (lamp == 0) {
+                    isLitRow = false;
+                    break;
                 }
             }
-
-            max = Math.max(tmpMax, max);
+            if (isLitRow) {
+                numLitRows++;
+            }
         }
-
-        System.out.println(max);
+        return numLitRows;
     }
 }
