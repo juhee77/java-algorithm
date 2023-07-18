@@ -1,4 +1,4 @@
-package 백준.graph;
+package 백준.graph.topologicalSort;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,9 +9,9 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj_2252_줄세우기_위상정렬 {
-    private static StringBuilder sb = new StringBuilder();
-    private static ArrayList<ArrayList<Integer>> graphs = new ArrayList<>();
-    private static int indegree[];
+    private static final StringBuilder sb = new StringBuilder();
+    private static final ArrayList<ArrayList<Integer>> graphs = new ArrayList<>();
+    private static int[] indegree;
     private static void toopologySort(){
         Queue<Integer> queue = new LinkedList<>();
         for(int i=0;i<indegree.length;i++) {
@@ -20,7 +20,7 @@ public class boj_2252_줄세우기_위상정렬 {
 
         while(!queue.isEmpty()){
             int now = queue.poll();
-            sb.append(now+1+" ");
+            sb.append(now + 1).append(" ");
             for(int next: graphs.get(now)){
                 indegree[next]--;
                 if(indegree[next]==0) queue.add(next);
@@ -35,7 +35,7 @@ public class boj_2252_줄세우기_위상정렬 {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
         indegree = new int[n];
-        for(int i=0;i<n;i++) graphs.add(new ArrayList<Integer>());
+        for(int i=0;i<n;i++) graphs.add(new ArrayList<>());
         for(int i=0;i<m;i++){
             st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken())-1;

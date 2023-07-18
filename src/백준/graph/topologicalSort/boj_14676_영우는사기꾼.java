@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 
-public class boj_1647_영우는사기꾼 {
+public class boj_14676_영우는사기꾼 {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringTokenizer st;
     private static final List<List<Integer>> outGraph = new ArrayList<>();

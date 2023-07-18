@@ -1,4 +1,4 @@
-package 백준.graph;
+package 백준.graph.topologicalSort;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,11 +9,10 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj_1005_ACMCraft {
-    private static StringBuilder sb = new StringBuilder();
+    private static final StringBuilder sb = new StringBuilder();
 
-    private static int topologicalSort(ArrayList<ArrayList<Integer>> outarray,ArrayList<ArrayList<Integer>> inarray,int goal, int[] indegree,int time[], int n){
+    private static int topologicalSort(ArrayList<ArrayList<Integer>> outarray, ArrayList<ArrayList<Integer>> inarray, int goal, int[] indegree, int[] time, int n){
         Queue<Integer> queue = new LinkedList<>();
-        int ti = 0;
         for(int i=0;i<n;i++){
             if(indegree[i]==0) queue.add(i);
         }
@@ -44,16 +43,16 @@ public class boj_1005_ACMCraft {
             int building = Integer.parseInt(st.nextToken());
             int rule = Integer.parseInt(st.nextToken());
 
-            ArrayList<ArrayList<Integer>> outarray = new ArrayList<ArrayList<Integer>>();
-            ArrayList<ArrayList<Integer>> inarray = new ArrayList<ArrayList<Integer>>();
+            ArrayList<ArrayList<Integer>> outarray = new ArrayList<>();
+            ArrayList<ArrayList<Integer>> inarray = new ArrayList<>();
 
-            int time [] = new int[building];
-            int indegree[] = new int[building];
+            int[] time = new int[building];
+            int[] indegree = new int[building];
             st = new StringTokenizer(br.readLine());
             for(int i=0;i<building;i++) {
                 time[i] = Integer.parseInt(st.nextToken());
-                outarray.add(new ArrayList<Integer>());
-                inarray.add(new ArrayList<Integer>());
+                outarray.add(new ArrayList<>());
+                inarray.add(new ArrayList<>());
             }
 
             for(int i=0;i<rule;i++){

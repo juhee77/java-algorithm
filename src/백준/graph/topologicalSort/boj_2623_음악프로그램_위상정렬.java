@@ -1,4 +1,4 @@
-package 백준.graph;
+package 백준.graph.topologicalSort;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,9 +36,9 @@ public class boj_2623_음악프로그램_위상정렬 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        int indegree[] = new int[n + 1];
-        ArrayList<ArrayList<Integer>> array = new ArrayList<ArrayList<Integer>>();
-        for(int i=0;i<n+1;i++) array.add(new ArrayList<Integer>());
+        int[] indegree = new int[n + 1];
+        ArrayList<ArrayList<Integer>> array = new ArrayList<>();
+        for(int i=0;i<n+1;i++) array.add(new ArrayList<>());
 
 
         for(int i=0;i<m;i++){
