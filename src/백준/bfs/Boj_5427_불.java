@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Boj_5472_불 {
+public class Boj_5427_불 {
     private static int w, h;
     private static char[][] map;
     private static final int[][] dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
