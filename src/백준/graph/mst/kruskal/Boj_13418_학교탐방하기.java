@@ -57,21 +57,17 @@ public class Boj_13418_학교탐방하기 {
         }
 
         //내려가는 길을 연결할 수 있는 만큼 연결하는 경우
+        int minCnt= n-1;
         for (int i = 0; i < n; i++) {
             parents[i] = i;
         }
 
         for (Road desc : descs) {
-            union(desc.start, desc.end);
-        }
-
-        //모든 내리막길 연결은 완료한 후에 남은 것들은 경사로로연결한다.
-        int minCnt = 0;
-        for (Road slope : slopes) { //남은 것들 중에 연결하기
-            if (union(slope.start, slope.end)) {
-                minCnt++;
+            if(union(desc.start, desc.end)){
+                minCnt--;
             }
         }
+
         System.out.println((maxCnt * maxCnt) - (minCnt * minCnt));
     }
 
