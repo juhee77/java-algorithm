@@ -1,11 +1,12 @@
-package 백준.dynamicProgramming.가장긴부분수열;
+package 백준.가장긴증가부분수열;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_14002_가장긴증가하는부분수열4 {
+public class boj_11053_가장긴증가하는부분수열 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
@@ -25,25 +26,15 @@ public class boj_14002_가장긴증가하는부분수열4 {
         for(int i=0;i<numberCount;i++){
             sum[i]=1;
             for(int j=0;j<i;j++)
-                if(arr[i]>arr[j])
-                    if(sum[i]<=sum[j]) sum[i] = sum[j]+1;
-//            System.out.println(Arrays.toString(sum));
+                if(arr[i]>arr[j] && sum[i]<=sum[j])sum[i] = sum[j]+1;
+            System.out.println(Arrays.toString(sum));
 
         }
         int max = 0;
         for(int i=0;i<numberCount;i++)
             max = Math.max(sum[i],max);
+
         System.out.println(max);
-        int idx =numberCount-1;
-        String tmp = "";
-        while(0<=idx){
-            if(max==sum[idx]){
-                tmp = arr[idx]+" "+tmp;
-                max--;
-            }
-            idx--;
-        }
-        System.out.println(tmp);
 
     }
 }
