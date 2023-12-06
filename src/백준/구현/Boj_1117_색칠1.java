@@ -11,65 +11,33 @@ public class Boj_1117_색칠1 {
         StringTokenizer st;
 
         st = new StringTokenizer(br.readLine());
-        int col = Integer.parseInt(st.nextToken());
-        int row = Integer.parseInt(st.nextToken());
-        int n = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
-        k = row / (k + 1);
-        int startR = Integer.parseInt(st.nextToken());
+        long w = Long.parseLong(st.nextToken());
+        long h = Long.parseLong(st.nextToken());
+        int f = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+        int x1 = Integer.parseInt(st.nextToken());
+        int y1 = Integer.parseInt(st.nextToken());
+        int x2 = Integer.parseInt(st.nextToken());
+        int y2 = Integer.parseInt(st.nextToken());
 
-        int startC = Integer.parseInt(st.nextToken());
-        int endR = Integer.parseInt(st.nextToken());
-        int endC = Integer.parseInt(st.nextToken());
+        //미리 영향을 받은 사각형의 넓이를 구한다.
+        long area = (long) (x2 - x1) * (y2 - y1) * (c + 1);
 
-        int[][] sum = new int[(int) (row * 1.5)][(int) (col * 1.5)];
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                sum[i][j] = 1;
+        if (f <= w / 2) {
+            // 접은 경우 넘어가지 않는 경우
+            if (f <= x1) {
+                //세로 범위안에 겹치는게 없음
+                System.out.println(w * h - area);
+            } else {
+                System.out.println(w * h - (area + (long) (Math.min(f, x2) - x1) * (y2 - y1) * (c + 1)));
+            }
+        } else {
+            // 접은 경우 넘어가는 경우*접은 부분 계산)
+            if (w <= x1 + f) {
+                System.out.println(w * h - area);
+            } else {
+                System.out.println(w * h - (area + (Math.min(w, f + x2) - (f + x1)) * (y2 - y1) * (c + 1)));
             }
         }
-
-
-        //세로 접기
-        for (int i = n; i < n + n; i++) {
-            //한줄씩
-            int next = 2 * n - i - 1;
-
-            for (int j = 0; j < row; j++) {
-                sum[j][i] += sum[j][next];
-//                sum[j][next] = 0;
-            }
-        }
-
-        //가로 접기
-        int start = 0;
-        if (k != 0) {
-            for (int i = 0; i < col / k + 1; i++) { //접을수 있는 횟수
-                start += k;
-                for (int j = start; j < start + k; j++) {
-                    for (int p = n; p < 2 * col; p++) {
-                        sum[j][p] += sum[start * 2 - j - 1][p];
-//                    sum[start * 2 - j - 1][p] = 0;
-                    }
-                }
-            }
-        }
-
-
-        int paintSum = 0;
-        for (int p = startR; p < endR; p++) {
-            for (int q = startC; q < endC; q++) {
-                paintSum += sum[row - q - 1][(n + p)];
-//                paintSum += sum[(n + p)][row - q - 1];
-//                System.out.println((row-q-1)+" "+(n+p));
-            }
-        }
-//
-//        for (int i = 0; i < row; i++) {
-//            System.out.println(Arrays.toString(sum[i]));
-//        }
-
-        System.out.println((row * col) - paintSum);
     }
 }
