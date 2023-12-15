@@ -13,7 +13,7 @@ public class Boj_15988_123더하기3 {
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-        int[] dp = new int[1_000_000];
+        int[] dp = new int[1_000_001];
         dp[1] = 1;
         dp[2] = 2;
         dp[3] = 4;
