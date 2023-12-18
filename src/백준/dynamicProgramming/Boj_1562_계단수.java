@@ -3,11 +3,10 @@ package 백준.dynamicProgramming;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
 
 public class Boj_1562_계단수 {
     private static final int MOD = 1_000_000_000;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -16,25 +15,32 @@ public class Boj_1562_계단수 {
             System.out.println(0);
             return;
         }
-        if (n == 10) {
-            System.out.println(0);
+
+        int[][][] dp = new int[n + 1][10][1 << 10]; //자리수, 사용 숫자, 각 숫자에서의 사용한 vistied의 개수
+
+        for (int i = 1; i < 10; i++) {
+            dp[1][i][1 << i] = 1;
         }
 
-
-        int[][] dp = new int[n + 1][12];
-
-        Arrays.fill(dp[1], 1);
-        dp[1][0] = dp[1][1]= 0;
         for (int i = 2; i <= n; i++) {
-            for (int j = 1; j <= 10; j++) {
-                dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j + 1]) % MOD;
+            for (int j = 0; j < 10; j++) {
+                for (int p = 0; p < 1024; p++) {
+                    int afterVisit = p | (1 << j);
+                    if (0 < j) {
+                        dp[i][j][afterVisit] = (dp[i][j][afterVisit] + dp[i - 1][j - 1][p]) % MOD;
+                    }
+                    if (j < 9) {
+                        dp[i][j][afterVisit] = (dp[i][j][afterVisit] + dp[i - 1][j + 1][p]) % MOD;
+                    }
+                }
             }
-            System.out.println(Arrays.toString(dp[i]));
+
+
         }
 
         long sum = 0;
-        for (int i = 1; i <= 10; i++) {
-            sum += dp[n][i];
+        for (int i = 0; i < 10; i++) {
+            sum += dp[n][i][1023];
             sum %= MOD;
         }
         System.out.println(sum);
