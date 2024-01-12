@@ -30,11 +30,12 @@ public class Boj_6118_숨바꼭질 {
             graphs.get(b).add(a);
         }
 
-        PriorityQueue<Integer> q = new PriorityQueue<>();
+        Queue<Integer> q = new ArrayDeque<>();
         boolean[] visited = new boolean[n];
         visited[0] = true;
+
         //가장 작은 헛간 번호, 헛간까ㅣㅈ의 거리, 헛간의 개수
-        int max = 0; //헛간 번호
+        int last = 0; //헛간 번호
         int depth = 0; //거리
         int cnt = 0; //헛간 개수
 
@@ -42,20 +43,17 @@ public class Boj_6118_숨바꼭질 {
             q.add(integer);
             visited[integer] = true;
         }
-//        q.addAll(graphs.get(0));
 
         while (!q.isEmpty()) {
+            last = Integer.MAX_VALUE;
             depth++;
             cnt = q.size();
 
             for (int i = 0; i < cnt; i++) {
-                Integer poll = q.poll();
-                if (i == 0) {
-                    max = poll;
-                }
+                int po = q.poll();
+                last = Math.min(last, po);
 
-
-                for (Integer integer : graphs.get(poll)) {
+                for (Integer integer : graphs.get(po)) {
                     if (!visited[integer]) {
                         q.add(integer);
                         visited[integer] = true;
@@ -63,10 +61,9 @@ public class Boj_6118_숨바꼭질 {
 
                 }
             }
-
         }
 
-        System.out.println((max+1) + " " + depth + " " + cnt);
+        System.out.println((last + 1) + " " + depth + " " + cnt);
 
     }
 }
