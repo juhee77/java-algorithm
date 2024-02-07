@@ -20,7 +20,7 @@ public class Boj_1206_사람의수 {
         }
 
         int ans = 0;
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < 1000; i++) {
             if (able(i)) {
                 ans = i;
                 break;
@@ -31,16 +31,12 @@ public class Boj_1206_사람의수 {
 
     private static boolean able(int goal) {
         for (int i = 0; i < n; i++) {
-            double ans = arr[i] * goal * 1000;
-            System.out.println("ANS" + ans);
+            double ans = arr[i] * goal;
+            System.out.println((arr[i] * goal * 1000) + " " + i + " " + ans);
 
-            System.out.println(ans % 1000);
-            if (ans % 1000 >= 1)
+            if (1000 - ans > 9 && 1000 - ans != 1000)
                 return false;
 
-            if (ans < 99 || 10000 <= ans) {
-                return false;
-            }
         }
         return true;
     }
