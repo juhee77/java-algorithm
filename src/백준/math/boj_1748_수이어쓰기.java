@@ -11,6 +11,7 @@ public class boj_1748_수이어쓰기 {
         int numberCount = Integer.parseInt(br.readLine());
 
         int sum = 0;
+        //각각의 자리수 개수만 센다
         for (int i = 1; i <= numberCount; i *= 10)
             sum += numberCount - i + 1;
         System.out.println(sum);
