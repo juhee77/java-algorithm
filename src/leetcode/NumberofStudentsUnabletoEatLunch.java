@@ -21,4 +21,29 @@ class NumberofStudentsUnabletoEatLunch {
         }
         return students.length - isAteCnt;
     }
+
+    //more efficient
+    public int countStudents2(int[] students, int[] sandwiches) {
+        int zeroCnt = 0;
+        int oneCnt;
+
+        for (int student : students) {
+            if (student == 0) {
+                zeroCnt++;
+            }
+        }
+        oneCnt = students.length - zeroCnt;
+        for (int i = 0; i < sandwiches.length; i++) {
+            if (sandwiches[i] == 0) {
+                zeroCnt--;
+                if (zeroCnt < 0)
+                    return sandwiches.length - i;
+            } else {
+                oneCnt--;
+                if (oneCnt < 0)
+                    return sandwiches.length - i;
+            }
+        }
+        return 0;
+    }
 }
