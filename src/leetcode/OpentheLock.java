@@ -11,6 +11,7 @@ class OpentheLock {
         for (String deadend : deadends) {
             visited[Integer.valueOf(deadend)] = true;
         }
+        if(visited[0]) return -1;
 
         bfs.add(0);
         visited[0] = true;
