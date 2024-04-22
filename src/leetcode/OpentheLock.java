@@ -1,3 +1,5 @@
+package leetcode;
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -26,15 +28,15 @@ class OpentheLock {
                 for (int i = 1; i <= 1000; i *= 10) {
                     // 1 더하기
                     int range = (poll / i) % 10 + 1;
-                    int hold = 0;
+                    int hold;
                     if (range == 10) {
                         hold = -9 * i;
-                    }else{
+                    } else {
                         hold = i;
                     }
 
                     int newVal = poll + hold;
-                    if (0<=newVal && newVal < 10000 && !visited[newVal]) {
+                    if (0 <= newVal && newVal < 10000 && !visited[newVal]) {
                         bfs.add(newVal);
                         visited[newVal] = true;
                     }
@@ -42,13 +44,13 @@ class OpentheLock {
                     // 1 빼기
                     range = (poll / i) % 10 - 1;
                     if (range == -1) {
-                        hold =  9 * i;
-                    }else{
+                        hold = 9 * i;
+                    } else {
                         hold = -i;
                     }
 
                     newVal = poll + hold;
-                    if (0<=newVal && newVal < 10000 && !visited[newVal]) {
+                    if (0 <= newVal && newVal < 10000 && !visited[newVal]) {
                         bfs.add(newVal);
                         visited[newVal] = true;
                     }
