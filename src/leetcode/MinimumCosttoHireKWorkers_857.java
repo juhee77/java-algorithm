@@ -20,6 +20,7 @@ class MinimumCosttoHireKWorkers_857 {
         double sumQuality = 0;
 
         for (double[] worker : workers) {
+            //가장 저렴한 사람을 기준으로 퀄리티의 합을 구한다.
             sumQuality += worker[0];
             maxHeap.offer(worker[0]);
 
