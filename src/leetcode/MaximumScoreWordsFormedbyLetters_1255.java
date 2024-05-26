@@ -1,10 +1,9 @@
 package leetcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
-class Solution {
+class MaximumScoreWordsFormedbyLetters_1255 {
     HashMap<Character, Integer> scores = new HashMap<>();
     int[] dict = new int[26];
     String[] words;
@@ -17,10 +16,6 @@ class Solution {
             scores.put(letter, score[temp]);
             dict[temp]++;
         }
-        System.out.printf(Arrays.toString(dict)+"\n");
-        //1. 가능한 단어들을 모두 조합하여 확인
-        //2. 점수측정
-
         dfs(0, 0);
         return maxScore;
     }
@@ -42,18 +37,17 @@ class Solution {
         for (char c : words[depth].toCharArray()) {
             flag = false;
             int charIndex = c - 'a';
-            if (scores.containsKey(c) && dict[charIndex]>0) {
+            if (scores.containsKey(c) && dict[charIndex] > 0) {
                 tempScore += scores.get(c);
                 dict[charIndex]--;
                 list.add(charIndex);
                 flag = true;
-            } else{
+            } else {
                 //안된다.
                 break;
             }
         }
 
-        System.out.println(words[depth] + " " + depth + " " + tempScore);
         //다 있으면 마지막에 true로 끝남
         if (flag) {
             dfs(depth + 1, score + tempScore);
