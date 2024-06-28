@@ -12,13 +12,10 @@ class GrumpyBookstoreOwner_1052 {
         }
 
         int max = 0;
-        for (int i = minutes + 1; i <= cLen; i++) {
-            // i-m ~~ i 까지의 값을 모두 취한다고 생각 
-            // 즉 0~k , k+m ~end 까지는  subSUm에서 
-            // k~k+m까지는 sum에서 취함 
+        for (int i = minutes; i <= cLen; i++) {
             int left = subSum[i - minutes] - subSum[0];
-            int right = subSum[cLen - 1] - sum[i];
-            int now = sum[i] - sum[i - minutes - 1];
+            int right = subSum[cLen] - subSum[i];
+            int now = sum[i] - sum[i - minutes];
 
             max = Math.max(max, left + right + now);
         }
