@@ -31,4 +31,32 @@ class SolutionLuckyNumbersinaMatrix_1380 {
         return ans;
 
     }
+
+    public List<Integer> luckyNumbers2(int[][] matrix) {
+        int colMax;
+        int colMaxMin = Integer.MAX_VALUE;
+        int rowMin;
+        int rowMinMax = Integer.MIN_VALUE;
+
+        for (int i = 0; i < matrix.length; i++) {
+            rowMin = Integer.MAX_VALUE;
+            for (int j = 0; j < matrix[0].length; j++) {
+                rowMin = Math.min(rowMin, matrix[i][j]);
+            }
+            rowMinMax = Math.max(rowMinMax, rowMin);
+        }
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            colMax = 0;
+            for (int j = 0; j < matrix.length; j++) {
+                colMax = Math.max(colMax, matrix[j][i]);
+            }
+            colMaxMin = Math.min(colMaxMin, colMax);
+        }
+
+        if (colMaxMin == rowMinMax) {
+            return List.of(colMaxMin);
+        }
+        return List.of();
+    }
 }
