@@ -3,14 +3,12 @@ package 백준.graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class boj_1197_최소스패닝트리 {
-    private static int v, e, parents[];
+    private static int[] parents;
     private static ArrayList<Edge> edges = new ArrayList<>();
 
     static class Edge implements Comparable<Edge> {
@@ -26,8 +24,7 @@ public class boj_1197_최소스패닝트리 {
 
         @Override
         public int compareTo(Edge o) {
-            if (this.distance < o.distance) return -1;
-            else return 1;
+            return this.distance - o.distance;
         }
     }
 
@@ -48,12 +45,12 @@ public class boj_1197_최소스패닝트리 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int result = 0;
 
-        v = Integer.parseInt(st.nextToken());// 정점
-        e = Integer.parseInt(st.nextToken()); // 간선
+        int v = Integer.parseInt(st.nextToken());// 정점
+        int e = Integer.parseInt(st.nextToken()); // 간선
 
         parents = new int[v + 1];
         // 부모 테이블상에서, 부모를 자기 자신으로 초기화
-        for (int i = 1; i <= v; i++) {
+        for (int i = 1; i < v + 1; i++) {
             parents[i] = i;
         }
         //edge 입력
@@ -62,14 +59,14 @@ public class boj_1197_최소스패닝트리 {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
-            edges.add(new Edge(c,a,b));
+            edges.add(new Edge(c, a, b));
         }
         Collections.sort(edges);
 
-        for (int i = 0; i < edges.size(); i++) {
-            int cost = edges.get(i).distance;
-            int a = edges.get(i).nodeA;
-            int b = edges.get(i).nodeB;
+        for (Edge edge : edges) {
+            int cost = edge.distance;
+            int a = edge.nodeA;
+            int b = edge.nodeB;
             //사이클이 발생하지 않는 경우에만 집합에 포함
             if (findParent(a) != findParent(b)) {
                 unionParent(a, b);
@@ -80,3 +77,11 @@ public class boj_1197_최소스패닝트리 {
         System.out.println(result);
     }
 }
+
+/*
+5 4
+1 2 -2147483648
+2 3 2147483647
+1 4  2147483647
+5 4  2147483647
+ */
