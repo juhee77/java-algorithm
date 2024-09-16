@@ -3,53 +3,48 @@ package 백준.math;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Boj_17214_다항함수의적분 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        StringBuilder sb = new StringBuilder();
+        StringBuilder ans = new StringBuilder();
 
-        String input = br.readLine();
-        input = input.replace("-", "+-");
-//        System.out.println(input);
-        String[] arr = input.split("[+]");
+        String input = br.readLine().replace("-", "+-");
+        String[] terms = input.split("[+]");
 
-        for (String s : arr) {
-//            System.out.println(s);
+        for (String term : terms) {
             int xCnt = 0;
-            char[] charArray = s.toCharArray();
-            for (char c : charArray) {
+            char[] eachTerm = term.toCharArray();
+            for (char c : eachTerm) {
                 if (c == 'x') {
                     xCnt++;
                 }
             }
 
-            if (s.equals("")) continue;
+            if (term.length() > 0) {
+                int prefix = 0;
+                int xPlace = term.indexOf('x');
+                String prefixNumber;
 
-            int prefix = 0;
-            int xPlace = s.indexOf('x');
-            if (charArray[0] == '-') {
-                sb = (sb.length() != 0) ? sb.delete(sb.length() - 1, sb.length()) : sb;
-                String substring = xPlace != -1 ? s.substring(1, xPlace) : s.substring(1);
-//                System.out.println(substring);
-                if (substring.length() > 0) prefix = Integer.parseInt(substring);
+                if (eachTerm[0] == '-') {
+                    if ((ans.length() != 0)) ans.delete(ans.length() - 1, ans.length());
+                    prefixNumber = xPlace != -1 ? term.substring(1, xPlace) : term.substring(1);
+                    if (prefixNumber.length() > 0) prefix = Integer.parseInt(prefixNumber);
+                    ans.append("-");
+                } else {
+                    prefixNumber = xPlace != -1 ? term.substring(0, xPlace) : term;
+                    if (prefixNumber.length() > 0) prefix = Integer.parseInt(prefixNumber);
+                }
 
-                sb.append("-");
-            } else {
-                String substring = xPlace != -1 ? s.substring(0, xPlace) : s;
-//                System.out.println(substring);
-
-                if (substring.length() > 0) prefix = Integer.parseInt(substring);
+                int coefficient = (prefix == 0) ? 0 : prefix / (xCnt + 1);
+                if (coefficient >= 1) {
+                    if (coefficient != 1) ans.append(coefficient);
+                    ans.append("x".repeat(xCnt + 1));
+                    ans.append("+");
+                }
             }
-            int i = (prefix == 0) ? 0 : prefix / (xCnt + 1);
-//            System.out.println("I" + " " + i);
-            if (i != 1) sb.append(i);
-            sb.append("x".repeat(xCnt + 1));
-            sb.append("+");
         }
-        sb.append("W");
-        System.out.println(sb);
+        ans.append("W");
+        System.out.println(ans);
     }
 }
