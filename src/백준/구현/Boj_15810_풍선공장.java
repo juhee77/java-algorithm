@@ -8,6 +8,24 @@ import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Boj_15810_풍선공장 {
+    /**
+     *
+     *
+     * 음수일 경우 : 두 원소의 위치를 교환 안함
+     *
+     * 양수일 경우 : 두 원소의 위치를 교환 함
+     *
+     *
+     */
+    private static class test implements Comparable<test>{
+        int start;
+
+
+        @Override
+        public int compareTo(test o) {
+            return 0;
+        }
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -18,7 +36,12 @@ public class Boj_15810_풍선공장 {
 
         st = new StringTokenizer(br.readLine());
         //시간. 걸리는 시간
-        PriorityQueue<long[]> pq = new PriorityQueue<>(Comparator.comparingLong(o -> o[0]));
+        PriorityQueue<long[]> pq = new PriorityQueue<>(new Comparator<long[]>() {
+            @Override
+            public int compare(long[] o1, long[] o2) {
+                return 0;
+            }
+        });
 
         for (int i = 0; i < peCnt; i++) {
             int time = Integer.parseInt(st.nextToken());
