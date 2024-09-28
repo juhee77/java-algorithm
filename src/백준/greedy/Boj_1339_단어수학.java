@@ -21,7 +21,7 @@ public class Boj_1339_단어수학 {
 
         @Override
         public int compareTo(WordChar other) {
-            return Long.compare(other.usedCnt, usedCnt);
+            return (other.usedCnt < usedCnt) ? -1 : ((other.usedCnt == usedCnt) ? 0 : 1);
         }
     }
 
