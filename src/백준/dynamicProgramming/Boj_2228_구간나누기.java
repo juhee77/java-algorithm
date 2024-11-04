@@ -21,25 +21,26 @@ public class Boj_2228_구간나누기 {
             prefixSum[i] = prefixSum[i - 1] + arr[i];
         }
 
-        int[][] dp = new int[n + 1][m + 1];
-        for (int i = 0; i <= n; i++) {
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 0; i <= m; i++) {
             Arrays.fill(dp[i], Integer.MIN_VALUE);
         }
         dp[0][0] = 0;
 
-        for (int j = 1; j <= m; j++) {
-            for (int i = j; i <= n; i++) {
-                for (int k = j - 1; k < i; k++) {
-                    int currentSum = prefixSum[i] - prefixSum[k];
-                    dp[i][j] = Math.max(dp[i][j], dp[k][j - 1] + currentSum);
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                // 이전 값으로 초기화
+                dp[i][j] = dp[i][j - 1];
+                for (int k = 1; k <= j; k++) {
+                    if (k >= 2) { // 구간을 나눌 수 있을 경우
+                        dp[i][j] = Math.max(dp[i - 1][k - 2] + prefixSum[j] - prefixSum[k - 1], dp[i][j]);
+                    } else if (k == 1 && i == 1) {
+                        dp[i][j] = Math.max(dp[i][j], prefixSum[j]);  // 첫 번째 구간일 경우
+                    }
                 }
             }
         }
 
-        int maxSum = Integer.MIN_VALUE;
-        for (int i = 1; i <= n; i++) {
-            maxSum = Math.max(maxSum, dp[i][m]);
-        }
-        System.out.println(maxSum);
+        System.out.println(dp[m][n]);
     }
 }
