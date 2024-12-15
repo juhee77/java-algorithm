@@ -24,11 +24,12 @@ public class Boj_16934_게임닉네임 {
 
                 } else {
                     int hold = 2;
+                    Trie.TrieNode trieNode = trie.searchTrie(now);
                     while (true) {
-                        String temp = now + hold;
-                        if (!trie.search(temp)) {
-                            trie.insert(temp);
-                            sb.append(temp);
+                        String word = String.valueOf(hold);
+                        if (!trie.search(trieNode, word)) {
+                            trie.insert(trieNode, word);
+                            sb.append(now + hold);
                             break;
                         }
                         hold++;
@@ -76,6 +77,14 @@ public class Boj_16934_게임닉네임 {
             current.isEndOfWord = true; // 단어의 끝 표시
         }
 
+        public void insert(TrieNode trieNode, String word) {
+            TrieNode current = trieNode;
+            for (char c : word.toCharArray()) {
+                current = current.children.computeIfAbsent(c, k -> new TrieNode());
+            }
+            current.isEndOfWord = true; // 단어의 끝 표시
+        }
+
         // 단어 검색
         public boolean search(String word) {
             TrieNode current = root;
@@ -86,6 +95,29 @@ public class Boj_16934_게임닉네임 {
                 }
             }
             return current.isEndOfWord; // 끝 노드 여부 반환(동일 단어가 있는지 반환)
+        }
+
+        public boolean search(TrieNode trieNode, String word) {
+            TrieNode current = trieNode;
+            for (char c : word.toCharArray()) {
+                current = current.children.get(c);
+                if (current == null) {
+                    return false; // 문자가 없으면 false
+                }
+            }
+            return current.isEndOfWord; // 끝 노드 여부 반환(동일 단어가 있는지 반환)
+        }
+
+
+        public TrieNode searchTrie(String word) {
+            TrieNode current = root;
+            for (char c : word.toCharArray()) {
+                current = current.children.get(c);
+                if (current == null) {
+                    return null; // 문자가 없으면 false
+                }
+            }
+            return current;// 끝 노드 여부 반환(동일 단어가 있는지 반환)
         }
 
         // 접두사 검색
@@ -100,5 +132,4 @@ public class Boj_16934_게임닉네임 {
             return true; // 접두사로 끝나는 경로가 있으면 true
         }
     }
-
 }
