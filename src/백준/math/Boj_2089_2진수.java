@@ -21,6 +21,6 @@ public class Boj_2089_2진수 {
 
             sb.append(remainder);
         }
-        System.out.println(sb.reverse().toString());
+        System.out.println(sb.reverse());
     }
 }
