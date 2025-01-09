@@ -10,16 +10,18 @@ public class Boj_2089_2진수 {
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-        while (n != 0) {
-            int remainder = n % -2;
-            n /= -2;
-
-            if (remainder < 0) {
-                remainder += 2;
-                n += 1;
+        if (n == 0) {
+            sb.append(0);
+        } else {
+            while (n != 0) {
+                int remainder = n % -2;
+                n /= -2;
+                if (remainder < 0) {
+                    remainder += 2;
+                    n += 1;
+                }
+                sb.append(remainder);
             }
-
-            sb.append(remainder);
         }
         System.out.println(sb.reverse());
     }
