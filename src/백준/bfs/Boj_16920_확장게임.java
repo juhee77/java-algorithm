@@ -4,100 +4,78 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 import java.util.Queue;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Boj_16920_확장게임 {
+
+    private static int n, m, s;
+    private static int[] dis, castles;
     private static int[][] dirs = new int[][]{{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
+
+    private static char[][] map;
+    private static Queue<Point>[] q;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        s = Integer.parseInt(st.nextToken());
+
+        castles = new int[s + 1];
+        q = new LinkedList[s + 1];
+        dis = new int[s + 1];
 
         st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int player = Integer.parseInt(st.nextToken());
-
-        char[][] map = new char[n][m];
-        int[] ans = new int[player];
-        int[] ableCnt = new int[player];
-
-        ArrayList<Queue<Point>> castles = new ArrayList<>();
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < player; i++) {
-            castles.add(new ArrayDeque<>());
-            ableCnt[i] = Integer.parseInt(st.nextToken());
+        for (int i = 1; i <= s; i++) {
+            dis[i] = Integer.parseInt(st.nextToken());
+            q[i] = new LinkedList<>();
         }
 
+        map = new char[n][m];
         for (int i = 0; i < n; i++) {
-            char[] inputs = br.readLine().toCharArray();
+            map[i] = br.readLine().toCharArray();
             for (int j = 0; j < m; j++) {
-                map[i][j] = inputs[j];
-                if (Character.isDigit(inputs[j])) {
-                    int index = inputs[j] - '1';
-                    castles.get(index).add(new Point(i, j));
-                    ans[index]++;
+                if ('1' <= map[i][j] && map[i][j] <= '9') {
+                    int userNo = map[i][j] - '0';
+                    q[userNo].add(new Point(j, i));
+                    castles[userNo]++;
                 }
             }
         }
 
-//        System.out.println("ABLE CNT" + Arrays.toString(ableCnt));
-//        System.out.println("ANS" + Arrays.toString(ans));
-
-
-        boolean flag = true;
-        while (flag) {
-            flag = false;
-            HashSet<Point> hashSet = new HashSet<>();
-            for (int i = 0; i < player; i++) {
-                //한 플레이어의 성의 사이즈
-                int size = castles.get(i).size();
-                hashSet.clear();
-
-                for (int j = 0; j < size; j++) { //성의 개수 만큼
-                    Point castle = castles.get(i).poll();
-                    Queue<Point> next = new ArrayDeque<>(); //성의 개수 만큼 확장
-                    next.add(castle);
-
-                    for (int p = 0; p < ableCnt[i] && !next.isEmpty(); p++) {
-                        int nowSize = next.size();
-
-                        for (int k = 0; k < nowSize; k++) {
-                            Point poll = next.poll();
-
-                            for (int[] dir : dirs) {
-                                int mvx = dir[0] + poll.x;
-                                int mvy = dir[1] + poll.y;
-
-                                if (mvx < 0 || n <= mvx || mvy < 0 || m <= mvy) {
-                                    continue;
-                                }
-                                if (map[mvx][mvy] == '.') {
-                                    next.add(new Point(mvx, mvy));
-                                    castles.get(i).add(new Point(mvx, mvy));
-                                    hashSet.add(new Point(mvx, mvy));
-                                }
+        while (true) {
+            boolean isExpanded = false;
+            for (int u = 1; u <= s; u++) {
+                int moveLimit = dis[u];
+                for (int i1 = 0; i1 < moveLimit; i1++) {
+                    int size = q[u].size();
+                    for (int j = 0; j < size; j++) {
+                        Point now = q[u].poll();
+                        for (int[] dir : dirs) {
+                            int mvX = now.x + dir[0];
+                            int mvY = now.y + dir[1];
+                            if (mvX < 0 || mvY < 0 || mvX >= m || mvY >= n) continue;
+                            if (map[mvY][mvX] == '.') {
+                                map[mvY][mvX] = (char) (u + '0');
+                                q[u].add(new Point(mvX, mvY));
+                                castles[u]++;
+                                isExpanded = true;
                             }
                         }
                     }
-                }
-
-                if (hashSet.size() > 0) {
-                    flag = true;
-                    ans[i]+=hashSet.size();
-                }
-                for (Point po : hashSet) {
-                    map[po.x][po.y] = (char) (i + '1');
+                    if (q[u].isEmpty()) break;
                 }
             }
+            if (!isExpanded) break;
         }
 
-        for (int an : ans) {
-            sb.append(an).append(" ");
+        for (int i = 1; i <= s; i++) {
+            System.out.print(castles[i] + " ");
         }
-        System.out.println(sb);
-
+        System.out.println();
     }
+
 }
