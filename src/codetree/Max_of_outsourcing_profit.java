@@ -82,9 +82,9 @@ public class Max_of_outsourcing_profit {
                 }
             }
 
-            System.out.println(Arrays.toString(dp[p]));
+//            System.out.println(Arrays.toString(dp[p]));
         }
-        System.out.println(dp[n-1][19]);
+        System.out.println(dp[n-1][n]);
 
 
     }
