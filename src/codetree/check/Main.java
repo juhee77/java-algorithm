@@ -1,12 +1,15 @@
 package codetree.check;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
     private static int[][] dirs = {{0, 1}, {1, 0}};
     private static int[][] arr;
-    private static boolean[][][][] visited; // [x][y][dir][dircnt]
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +18,6 @@ public class Main {
         int r = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         arr = new int[r][r];
-        visited = new boolean[r][r][2][k + 1]; // 방문 여부 체크
 
         for (int i = 0; i < r; i++) {
             st = new StringTokenizer(br.readLine());
@@ -30,11 +32,9 @@ public class Main {
         // 초기 큐 삽입 (방문 체크)
         if (r > 1 && arr[0][1] == 0) {
             queue.add(new int[]{0, 1, 0, 0}); // 오른쪽 이동
-            visited[0][1][0][0] = true;
         }
         if (r > 1 && arr[1][0] == 0) {
             queue.add(new int[]{1, 0, 1, 0}); // 아래쪽 이동
-            visited[1][0][1][0] = true;
         }
 
         while (!queue.isEmpty()) {
@@ -56,10 +56,7 @@ public class Main {
                 int newDirCnt = (i == dir) ? dircnt : dircnt + 1;
                 if (newDirCnt > k) continue;
 
-                if (!visited[mvX][mvY][i][newDirCnt]) {
-                    visited[mvX][mvY][i][newDirCnt] = true;
-                    queue.add(new int[]{mvX, mvY, i, newDirCnt});
-                }
+                queue.add(new int[]{mvX, mvY, i, newDirCnt});
             }
         }
 
