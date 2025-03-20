@@ -69,29 +69,46 @@ public class ss_1 {
             int index = Integer.parseInt(st.nextToken()) - 1;
             int direction = Integer.parseInt(st.nextToken());
 
-            //사라진 기사라면 끝
-            Soldier nowSoldier = soldiers[index];
-            if (nowSoldier.k - nowSoldier.damage < 0) continue;
-
-            //기사 이동
-            Queue<Integer> queue = new LinkedList<>();
-            for (int x = 0; x < soldiers[index].h && queue != null; x++) {
+            // 자신의 이동을 먼저 검사
+            boolean canMove = true;
+            for (int x = 0; x < soldiers[index].h; x++) {
                 for (int y = 0; y < soldiers[index].w; y++) {
                     int mvX = soldiers[index].r + dirs[direction][0] + x;
                     int mvY = soldiers[index].c + dirs[direction][1] + y;
-                    if (mvY >= 0 && mvX >= 0 && mapSize > mvY && mapSize > mvX && map[mvX][mvY][1] != 2) {
-                        if (map[mvX][mvY][0] >= 100)
-                            queue.add(map[mvX][mvY][0] - 100);
+
+                    // 벽에 부딪히면 이동 불가
+                    if (mvY < 0 || mvX < 0 || mvX >= mapSize || mvY >= mapSize || map[mvX][mvY][1] == 2) {
+                        canMove = false;
+                        break;
+                    }
+                }
+                if (!canMove) break;
+            }
+
+// 벽에 부딪히면 자신도 이동할 수 없다.
+            if (!canMove) continue; // 자신이 이동할 수 없다면 다음 명령으로 넘어간다.
+
+// 이제 이동할 수 있을 경우, queue에 다른 군인들만 이동하도록 처리
+            Queue<Integer> queue = new LinkedList<>();
+            for (int x = 0; x < soldiers[index].h; x++) {
+                for (int y = 0; y < soldiers[index].w; y++) {
+                    int mvX = soldiers[index].r + dirs[direction][0] + x;
+                    int mvY = soldiers[index].c + dirs[direction][1] + y;
+
+                    if (mvY >= 0 && mvX >= 0 && mvX < mapSize && mvY < mapSize && map[mvX][mvY][1] != 2) {
+                        if (map[mvX][mvY][0] >= 100) { // 다른 군인들 확인
+                            queue.add(map[mvX][mvY][0] - 100); // 군인에 해당하는 ID로 처리
+                        }
                     } else {
-                        queue = null;
+                        queue = null; // 벽이나 이동 불가로 인해 더 이상 이동 불가
                         break;
                     }
                 }
             }
 
-            //나 자신도 넘어가지 못하는 상황
-            if (queue == null) continue;
-            // 연관 해서 이동되는 기사
+// queue가 비어있거나 null일 경우 이동할 수 없다.
+            if (queue == null || queue.isEmpty()) continue; // 군인이 이동할 수 없는 경우
+
             List<Soldier> temp = getSoldiers(soldiersSize, queue, direction);
 
             //연관 해서 이동하다가 벽에 만나는 경우
@@ -123,6 +140,7 @@ public class ss_1 {
                 }
 
                 //본인도 이동
+                Soldier nowSoldier = soldiers[index];
                 colored(nowSoldier.r, nowSoldier.c, nowSoldier.w, nowSoldier.h, 0);
                 colored(nowSoldier.r + dirs[direction][0], nowSoldier.c + dirs[direction][1], nowSoldier.w, nowSoldier.h, 100 + nowSoldier.i);
                 soldiers[nowSoldier.i] = new Soldier(nowSoldier.i, nowSoldier.r + dirs[direction][0], nowSoldier.c + dirs[direction][1], nowSoldier.h, nowSoldier.w, nowSoldier.k, nowSoldier.damage);
