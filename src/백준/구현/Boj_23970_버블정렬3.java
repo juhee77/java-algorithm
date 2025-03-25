@@ -3,7 +3,6 @@ package 백준.구현;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Boj_23970_버블정렬3 {
@@ -52,7 +51,7 @@ public class Boj_23970_버블정렬3 {
                     swapped = true;
 
                     // 중간 상태가 arrEnd와 일치하는지 검사
-                    if (isSame(arr, arrEnd)) return true;
+                    if (isSame(arr, arrEnd, start, end)) return true;
                 }
             }
             if (!swapped) break; // 이미 정렬 완료된 경우
@@ -60,8 +59,8 @@ public class Boj_23970_버블정렬3 {
         return false;
     }
 
-    private static boolean isSame(int[] arrStart, int[] arrEnd) {
-        for (int i = 0; i < arrStart.length; i++) {
+    private static boolean isSame(int[] arrStart, int[] arrEnd, int start, int end) {
+        for (int i = start; i < end; i++) {
             if (arrStart[i] != arrEnd[i]) {
                 return false;
             }
