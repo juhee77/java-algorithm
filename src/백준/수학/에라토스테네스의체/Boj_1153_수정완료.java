@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Boj_1153_wrongAnswer {
+public class Boj_1153_수정완료 {
     private static List<Integer> primes = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
