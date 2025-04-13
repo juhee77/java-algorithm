@@ -93,8 +93,9 @@ public class Boj_16947_서울지하철2호선_ME {
         return false;
     }
 
-    private static void coloredCycle(Integer cycleStart, ArrayList<Integer> containsPath) {
+    private static void coloredCycle(int cycleStart, ArrayList<Integer> containsPath) {
         boolean marking = false;
+        //Integer을 형변화 하여 변환해야 비교 된다.
         for (int node : containsPath) {
             if (cycleStart == node) marking = true;
             if (marking) isInCycle[node] = true;
