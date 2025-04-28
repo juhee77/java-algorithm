@@ -11,7 +11,6 @@ import java.util.StringTokenizer;
 public class Boj_32029_지금자면꿈을꾸지만 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
 
         st = new StringTokenizer(br.readLine());
@@ -19,58 +18,62 @@ public class Boj_32029_지금자면꿈을꾸지만 {
         int a = Integer.parseInt(st.nextToken());
         int b = Integer.parseInt(st.nextToken());
 
-        List<Integer> arr = new ArrayList<>();
+        List<Integer> deadlines = new ArrayList<>();
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            arr.add(Integer.parseInt(st.nextToken()));
+            deadlines.add(Integer.parseInt(st.nextToken()));
         }
-        arr.add(0);
-        Collections.sort(arr);
-        int maxDiff = arr.get(1) - arr.get(0);
-        int maxIdx = 1;
+        Collections.sort(deadlines);
 
-        for (int i = 0; i < arr.size() - 1; i++) {
-            if (arr.get(i + 1) - arr.get(i) > maxDiff) {
-                maxDiff = arr.get(i + 1) - arr.get(i);
-                maxIdx = i + 1;
+        int answer = 0;
+
+        // 0번 과제부터 n개까지 중 언제 잠잘지 결정
+        for (int sleepPoint = 0; sleepPoint <= n; sleepPoint++) {
+            int time = (sleepPoint!=0)?a:0;
+            int cnt = 0;
+
+            // sleepPoint 이전까지는 그냥 a 주기로 과제
+            for (int i = 0; i < sleepPoint; i++) {
+                if (time <= deadlines.get(i)) {
+                    cnt++;
+                    time += a;
+                }
+            }
+            if(sleepPoint!=0)time-=a;
+
+            // 이제 sleepPoint 시점에 잠잘 수 있음
+            for (int x = 0; x < a; x++) {
+                int period = a - x;
+                //잠을 잔다.
+                int curTime = time + x * b + period;
+//                System.out.println(time+" "+x+" "+curTime);
+                int tempCnt = cnt;
+
+                // sleepPoint부터 나머지 과제 진행
+                for (int i = sleepPoint; i < n; i++) {
+                    if (curTime <= deadlines.get(i)) {
+                        tempCnt++;
+                        curTime += period;
+                    }
+                }
+
+//                System.out.println(sleepPoint+" "+period+" "+cnt+" " +tempCnt);
+                answer = Math.max(answer, tempCnt);
             }
         }
 
-        if (b == 0) {
-            System.out.println(n);
-            return;
-        }
-
-        int maxHw = 0;
-        int maxNoHw = 0;
-        int now = 0;
-        int noSleepNow = a;
-        int aa = a;
-
-        for (int i = 1; i <= n; i++) {
-            if (maxIdx == i) {
-                int x = (b == 1) ? arr.get(i) - a : (arr.get(i) - a) / (b - 1);
-                if (x <  0) continue;
-                int tempA = a - x;
-                if (tempA < 0) continue;
-                a = tempA;
-                System.out.println(i+" " +x+" "+a);
-                if(now==0) now+=a;
-                now += b*x ; //수면
-            }
-
-            System.out.println(i + " " + a + " " + now + " " + maxHw);
-            if (now <= arr.get(i)) {
-                maxHw++;
-                now += a;
-            }
-
-            if(noSleepNow <= arr.get(i)){
-                maxNoHw++;
-                noSleepNow+=aa;
+        // 잠을 아예 안 자는 경우도 체크
+        int time = a;
+        int cnt = 0;
+        for (int d : deadlines) {
+            if (time <= d) {
+                cnt++;
+                time += a;
             }
         }
-        System.out.println(maxHw + " " + maxNoHw);
-        System.out.println(Math.max(maxHw, maxNoHw));
+//        System.out.println(answer + " " + cnt);
+        answer = Math.max(answer, cnt);
+
+        System.out.println(answer);
     }
 }
