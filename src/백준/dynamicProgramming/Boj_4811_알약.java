@@ -12,7 +12,7 @@ public class Boj_4811_알약 {
 
         BigInteger[] catalan = new BigInteger[31];
         catalan[0] = BigInteger.ONE;
-        int nowHold = 1;
+        int nowHold = 0;
 
         int input;
         while ((input = Integer.parseInt(br.readLine())) != 0) {
