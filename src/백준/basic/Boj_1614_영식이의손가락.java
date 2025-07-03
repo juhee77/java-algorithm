@@ -1,29 +1,25 @@
 package 백준.basic;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Boj_1614_영식이의손가락 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int broken = Integer.parseInt(br.readLine());
-        int maxUse = Integer.parseInt(br.readLine());
-
-        int[] fingers = {1, 2, 3, 4, 5, 4, 3, 2};
-        int idx = 0;
-        int count = 0;
-        int used = 0;
-
-        while (true) {
-            int finger = fingers[idx];
-            if (finger == broken) {
-                if (used >= maxUse) break;
-                used++;
-            }
-            count++;
-            idx = (idx + 1) % fingers.length;
+        long hurt = Long.parseLong(br.readLine());
+        long num = Long.parseLong(br.readLine());
+        long result;
+        if (hurt == 1) {
+            result = num * 8;
+        } else if (hurt == 2) {
+            result = 1 + (num / 2) * 8 + (num % 2) * 6;
+        } else if (hurt == 3) {
+            result = 2 + (num / 2) * 8 + (num % 2) * 4;
+        } else if (hurt == 4) {
+            result = 3 + (num / 2) * 8 + (num % 2) * 2;
+        } else {
+            result = 4 + num * 8;
         }
-        System.out.println(count);
+        System.out.println(result);
     }
 }
