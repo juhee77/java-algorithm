@@ -1,4 +1,4 @@
-package 백준.가장긴증가부분수열;
+package 백준.dynamicProgramming.가장긴증가부분수열;
 
 import java.io.*;
 import java.util.ArrayList;

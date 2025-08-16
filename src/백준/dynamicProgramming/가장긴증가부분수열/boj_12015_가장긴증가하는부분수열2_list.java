@@ -1,11 +1,12 @@
-package 백준.가장긴증가부분수열;
+package 백준.dynamicProgramming.가장긴증가부분수열;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
-public class boj_12015_가장긴증가하는부분수열2 {
+public class boj_12015_가장긴증가하는부분수열2_list {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,13 +15,13 @@ public class boj_12015_가장긴증가하는부분수열2 {
 
         int numberCount = Integer.parseInt(br.readLine());
         int[] arr = new int[numberCount];
-        Stack<Integer> LIS = new Stack<>();
+        ArrayList<Integer> LIS = new ArrayList<>();
         LIS.add(0);
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < numberCount; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
-            if(LIS.peek()<arr[i]) LIS.add(arr[i]);
+            if(LIS.get(LIS.size()-1)<arr[i]) LIS.add(arr[i]);
             else{
                 //System.out.println(Arrays.toString(LIS.toArray()));
                 int start = 0;
@@ -38,7 +39,11 @@ public class boj_12015_가장긴증가하는부분수열2 {
         System.out.println(LIS.size()-1);
 
 
-//list 형식이 시간이 더 적게 든다 메모리는 리스트가 더 많이 듬
-
     }
 }
+
+/*9
+-10 -9 -8 -7 -6 -20 -19 -10 -7
+9
+8 9 10 1 2 3 4 5 6
+ */
