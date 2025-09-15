@@ -3,25 +3,29 @@ package 백준.graph.dijkstra;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Boj_17835_면접보는승범이네 {
     private static int N,M,K;
-    private static List<List<Graph>> graphs;
-    private static List<Integer> place;
-    public static class Graph{
-        int end;
+    private static final int INF = (int) 1e6;
+    private static List<List<Graph>> graphs = new ArrayList<>();
+    private static List<Integer> place = new ArrayList<>();
+    public static class Graph implements Comparable<Graph>{
+        int next;
         int cost;
 
-        public Graph(int end, int cost) {
-            this.end = end;
+        public Graph(int next, int cost) {
+            this.next = next;
             this.cost = cost;
+        }
+
+        @Override
+        public int compareTo(Graph o) {
+            return cost-o.cost;
         }
     }
     //최단 거리에 대한
-    public static void Main(String[]args) throws IOException {
+    public static void main(String[]args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
@@ -29,7 +33,7 @@ public class Boj_17835_면접보는승범이네 {
         K = Integer.parseInt(st.nextToken());
 
         for(int i=0;i<N;i++){
-            graphs.add(new ArrayList());
+            graphs.add(new ArrayList<Graph>());
         }
 
         for(int i=0;i<M;i++){
@@ -38,18 +42,64 @@ public class Boj_17835_면접보는승범이네 {
             int v = Integer.parseInt(st.nextToken())-1;
             int c = Integer.parseInt(st.nextToken());
 
-            graphs.get(u).add(new Graph(v,c));
+//            graphs.get(u).add(new Graph(v,c));
             graphs.get(v).add(new Graph(u,c));
         }
 
         // 면접장 위치(k개)
+        st = new StringTokenizer(br.readLine());
         for(int i=0;i<K;i++){
-
+            place.add(Integer.parseInt(st.nextToken())-1);
         }
 
+//        System.out.println(place);
 
+        //각 면접장에 대한 택시 최단 경로
+        int[][] distance = new int[N][N];
+        for(int pl : place ){
+            Arrays.fill(distance[pl],INF);
+            distance[pl][pl] = 0;
+            PriorityQueue<Graph> queue = new PriorityQueue<>();
+            queue.offer(new Graph(pl, 0));
 
+            while (!queue.isEmpty()) {
+                Graph node = queue.poll();
+                int now = node.next;
+                int dist = node.cost;
+                //현재 노드가 이미 방문한 노드라면 지나가기
+                if (distance[pl][now] < dist) continue;
 
+                for (Graph next : graphs.get(now)) {
+                    int cost = distance[pl][now] + next.cost;
+                    //현재 노드 방문후 다른노드 방문하는게 짧은경우
+                    if (cost < distance[pl][next.next]) {
+                        distance[pl][next.next] = cost;
+                        queue.offer(new Graph(next.next, cost));
+                    }
+                }
+            }
+//            System.out.println(Arrays.toString(distance[pl]));
+        }
+
+        //면접장에서 각 위치 까지의
+        int[] min = new int[N];
+        Arrays.fill(min,INF);
+        for(int pl : place ) {
+            for(int i=0;i<N;i++){
+                min[i] = Math.min(min[i],distance[pl][i]);
+            }
+        }
+//        System.out.println(Arrays.toString(min));
+        int ans = 0;
+        int max = min[0];
+        for(int i=2;i<N;i++){
+            if(ans<min[i]){
+                ans = i;
+                max = min[i];
+            }
+        }
+
+        System.out.println((ans+1)+" \n" +max);
 
 
 
