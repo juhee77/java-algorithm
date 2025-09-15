@@ -55,10 +55,13 @@ public class Boj_17835_면접보는승범이네 {
 //        System.out.println(place);
 
         //각 면접장에 대한 택시 최단 경로
-        int[][] distance = new int[N][N];
+        int[] distance = new int[N];
+        //면접장에서 각 위치 까지의
+        int[] min = new int[N];
+        Arrays.fill(min,INF);
         for(int pl : place ){
-            Arrays.fill(distance[pl],INF);
-            distance[pl][pl] = 0;
+            Arrays.fill(distance,INF);
+            distance[pl] = 0;
             PriorityQueue<Graph> queue = new PriorityQueue<>();
             queue.offer(new Graph(pl, 0));
 
@@ -67,29 +70,23 @@ public class Boj_17835_면접보는승범이네 {
                 int now = node.next;
                 int dist = node.cost;
                 //현재 노드가 이미 방문한 노드라면 지나가기
-                if (distance[pl][now] < dist) continue;
+                if (distance[now] < dist) continue;
 
                 for (Graph next : graphs.get(now)) {
-                    int cost = distance[pl][now] + next.cost;
+                    int cost = distance[now] + next.cost;
                     //현재 노드 방문후 다른노드 방문하는게 짧은경우
-                    if (cost < distance[pl][next.next]) {
-                        distance[pl][next.next] = cost;
+                    if (cost < distance[next.next]) {
+                        distance[next.next] = cost;
                         queue.offer(new Graph(next.next, cost));
                     }
                 }
             }
-//            System.out.println(Arrays.toString(distance[pl]));
-        }
 
-        //면접장에서 각 위치 까지의
-        int[] min = new int[N];
-        Arrays.fill(min,INF);
-        for(int pl : place ) {
             for(int i=0;i<N;i++){
-                min[i] = Math.min(min[i],distance[pl][i]);
+                min[i] = Math.min(min[i],distance[i]);
             }
         }
-//        System.out.println(Arrays.toString(min));
+
         int ans = 0;
         int max = min[0];
         for(int i=2;i<N;i++){
@@ -100,8 +97,6 @@ public class Boj_17835_면접보는승범이네 {
         }
 
         System.out.println((ans+1)+" \n" +max);
-
-
 
     }
 }
