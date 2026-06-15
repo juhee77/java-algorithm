@@ -2,7 +2,7 @@ package leetcode;
 
 public class DeleteTheMiddleNodeOfALinkedList_2095 {
     public ListNode deleteMiddle(ListNode head) {
-        if (head == null) return null;
+        if(head == null || head.next == null) return null;
         ListNode now = head;
         int count = 0;
         while (now != null) {
